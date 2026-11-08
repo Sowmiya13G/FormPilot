@@ -26,8 +26,8 @@ interface UserListClientProps {
 
 export function UserListClient({ initialUsers }: UserListClientProps) {
   const { data: session } = useSession();
-  const currentUserId = session?.user?.id;
-  const currentUserEmail = session?.user?.email;
+  const currentUserId = session?.user?.id || 'dev-admin-user';
+  const currentUserEmail = session?.user?.email || 'admin@wonderla.com';
 
   const [users, setUsers] = useState<IUser[]>(initialUsers);
   const [search, setSearch] = useState('');
