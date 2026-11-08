@@ -5,15 +5,26 @@ import Registration from '@/models/Registration';
 import { checkRateLimit } from '@/lib/rate-limit';
 import { isOriginAllowed, getCorsHeaders, handleCorsPreflight } from '@/lib/security/cors';
 import { validateRegistrationData } from '@/lib/validations/registration';
+import { uploadFileToDrive } from '@/lib/google/drive';
+import { syncRegistrationToSheet } from '@/lib/google/sheets';
+import { IRegistrationTemplate } from '@/types';
 
 export async function OPTIONS(request: NextRequest) {
   const origin = request.headers.get('origin');
   return handleCorsPreflight(origin, ['*']);
 }
 
+interface ParsedFile {
+  fieldKey: string;
+  name: string;
+  type: string;
+  size: number;
+  file?: File;
+}
+
 function parseFormDataPayload(formData: FormData) {
   const data: Record<string, unknown> = {};
-  const files: Array<{ fieldKey: string; name: string; type: string; size: number }> = [];
+  const files: ParsedFile[] = [];
   let templateId = '';
   let templateSlug = '';
   let idempotencyKey = '';
@@ -42,6 +53,7 @@ function parseFormDataPayload(formData: FormData) {
         name: value.name,
         type: value.type,
         size: value.size,
+        file: value,
       });
       continue;
     }
@@ -97,6 +109,7 @@ export async function POST(request: NextRequest) {
     await connectDB();
 
     let rawData: Record<string, unknown> = {};
+    let rawFiles: ParsedFile[] = [];
     let fileMetadataList: Array<{
       fieldKey: string;
       originalFilename: string;
@@ -116,6 +129,7 @@ export async function POST(request: NextRequest) {
       const formData = await request.formData();
       const parsed = parseFormDataPayload(formData);
       rawData = parsed.data;
+      rawFiles = parsed.files;
       templateId = parsed.templateId;
       templateSlug = parsed.templateSlug;
       if (parsed.idempotencyKey) {
@@ -204,6 +218,26 @@ export async function POST(request: NextRequest) {
       );
     }
 
+    // 6b. File Security Checks (Size <= 5MB, JPG/PNG/PDF)
+    const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5 MB
+    const ALLOWED_MIME_TYPES = ['image/jpeg', 'image/png', 'image/jpg', 'application/pdf'];
+    for (const f of rawFiles) {
+      if (f.size > MAX_FILE_SIZE) {
+        return NextResponse.json(
+          { error: `File "${f.name}" exceeds the 5 MB maximum size limit.` },
+          { status: 400, headers: corsHeaders }
+        );
+      }
+      if (f.type && !ALLOWED_MIME_TYPES.includes(f.type.toLowerCase())) {
+        return NextResponse.json(
+          {
+            error: `File "${f.name}" has an unsupported format. Only JPG, PNG, and PDF files are permitted.`,
+          },
+          { status: 400, headers: corsHeaders }
+        );
+      }
+    }
+
     // 7. Generate Unique Human-Readable Registration ID
     // e.g. REG-BANDHAN-9Y3K-8PQ2
     const cleanPrefix =
@@ -215,7 +249,7 @@ export async function POST(request: NextRequest) {
     const randomCode = Math.random().toString(36).substring(2, 6).toUpperCase();
     const registrationId = `REG-${cleanPrefix}-${timestampCode}-${randomCode}`;
 
-    // 8. Persist to MongoDB
+    // 8. Persist Initial Registration to MongoDB
     const registration = await Registration.create({
       registrationId,
       templateId: template._id,
@@ -232,6 +266,72 @@ export async function POST(request: NextRequest) {
       sourceOrigin: origin || undefined,
       ipAddress: clientIp,
     });
+
+    // 9. Synchronize Files to Private Google Drive Folder (Phase 8)
+    if (rawFiles.length > 0) {
+      try {
+        const uploadedFiles: Array<{
+          fieldKey: string;
+          originalFilename: string;
+          mimeType: string;
+          size: number;
+          driveFileId?: string;
+        }> = [];
+
+        for (const rf of rawFiles) {
+          if (!rf.file) continue;
+          const ext = rf.name.split('.').pop() || 'bin';
+          const filename = `${template.slug}_${registrationId}_${rf.fieldKey}_${Date.now()}.${ext}`;
+          const arrayBuffer = await rf.file.arrayBuffer();
+          const buffer = Buffer.from(arrayBuffer);
+
+          const driveRes = await uploadFileToDrive(buffer, {
+            filename,
+            mimeType: rf.type,
+            folderId: template.driveFolderId,
+          });
+
+          uploadedFiles.push({
+            fieldKey: rf.fieldKey,
+            originalFilename: rf.name,
+            mimeType: rf.type,
+            size: rf.size,
+            driveFileId: driveRes.driveFileId,
+          });
+        }
+
+        registration.files = uploadedFiles;
+        registration.driveSyncStatus = 'SYNCED';
+      } catch (driveErr) {
+        const errMessage =
+          driveErr instanceof Error ? driveErr.message : 'Google Drive upload error';
+        registration.driveSyncStatus = 'FAILED';
+        registration.integrationErrors.push({
+          service: 'DRIVE',
+          error: errMessage,
+          timestamp: new Date(),
+        });
+      }
+    }
+
+    // 10. Synchronize Entry to Google Sheets (Phase 9)
+    try {
+      const typedTemplate: IRegistrationTemplate = JSON.parse(JSON.stringify(template));
+      await syncRegistrationToSheet(typedTemplate, registration);
+      registration.sheetsSyncStatus = 'SYNCED';
+    } catch (sheetErr) {
+      const errMessage =
+        sheetErr instanceof Error ? sheetErr.message : 'Google Sheets synchronization error';
+      registration.sheetsSyncStatus = 'FAILED';
+      registration.integrationErrors.push({
+        service: 'SHEETS',
+        error: errMessage,
+        timestamp: new Date(),
+      });
+    }
+
+    // Save final status with updated drive/sheets results
+    await registration.save();
 
     return NextResponse.json(
       {

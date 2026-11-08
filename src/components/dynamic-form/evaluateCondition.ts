@@ -8,10 +8,10 @@ export function evaluateConditionRule(
 
   switch (rule.operator) {
     case 'equals':
-      return String(actualValue ?? '').trim() === String(rule.value ?? '').trim();
+      return String(actualValue ?? '').trim().toLowerCase() === String(rule.value ?? '').trim().toLowerCase();
 
     case 'notEquals':
-      return String(actualValue ?? '').trim() !== String(rule.value ?? '').trim();
+      return String(actualValue ?? '').trim().toLowerCase() !== String(rule.value ?? '').trim().toLowerCase();
 
     case 'isEmpty':
       return actualValue === undefined || actualValue === null || String(actualValue).trim() === '';
@@ -35,6 +35,8 @@ export function evaluateConditionRule(
       return true;
   }
 }
+
+export const evaluateRule = evaluateConditionRule;
 
 export function isFieldVisible(
   config: IConditionalConfig | undefined,

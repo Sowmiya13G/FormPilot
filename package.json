@@ -7,11 +7,14 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
+    "test": "vitest run",
+    "test:unit": "vitest run",
     "seed:admins": "tsx scripts/seed-admins.ts",
     "seed:wonderla": "tsx scripts/seed-wonderla-template.ts"
   },
   "dependencies": {
     "clsx": "^2.1.1",
+    "googleapis": "^189.0.0",
     "lucide-react": "^1.70.0",
     "mongoose": "^9.12.0",
     "next": "16.4.5",
@@ -26,11 +29,14 @@
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "@vitejs/plugin-react": "^6.2.1",
     "dotenv": "^18.0.9",
     "eslint": "^9",
     "eslint-config-next": "16.4.5",
     "tailwindcss": "^4",
     "tsx": "^4.23.15",
-    "typescript": "^5"
+    "typescript": "^5",
+    "vite": "^8.3.6",
+    "vitest": "^5.1.0"
   }
 }

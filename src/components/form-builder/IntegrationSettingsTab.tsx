@@ -1,9 +1,10 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import Card from '@/components/ui/Card';
+import Button from '@/components/ui/Button';
 import { ITemplateField } from '@/types';
-import { HardDrive, Table, ArrowRight, ShieldCheck } from 'lucide-react';
+import { HardDrive, Table, ArrowRight, ShieldCheck, RefreshCw, CheckCircle2 } from 'lucide-react';
 
 interface IntegrationSettingsTabProps {
   fields: ITemplateField[];
@@ -28,6 +29,31 @@ export function IntegrationSettingsTab({
   onChangeSheetTabId,
   onChangeSheetMapping,
 }: IntegrationSettingsTabProps) {
+  const [isFetchingHeaders, setIsFetchingHeaders] = useState(false);
+  const [fetchedHeaders, setFetchedHeaders] = useState<string[]>([]);
+  const [headerMessage, setHeaderMessage] = useState<string | null>(null);
+
+  const handleFetchHeaders = async () => {
+    if (!spreadsheetId.trim()) return;
+    setIsFetchingHeaders(true);
+    setHeaderMessage(null);
+    try {
+      const res = await fetch(
+        `/api/integrations/google/sheets/headers?spreadsheetId=${encodeURIComponent(
+          spreadsheetId.trim()
+        )}&sheetTabId=${encodeURIComponent(sheetTabId.trim() || 'Registrations')}`
+      );
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error);
+      setFetchedHeaders(data.headers || []);
+      setHeaderMessage(`Successfully fetched ${data.headers?.length || 0} headers from Row 1.`);
+    } catch (err) {
+      setHeaderMessage(err instanceof Error ? err.message : 'Failed to fetch headers');
+    } finally {
+      setIsFetchingHeaders(false);
+    }
+  };
+
   const handleMappingChange = (fieldKey: string, headerName: string) => {
     onChangeSheetMapping({
       ...sheetMapping,
@@ -72,8 +98,8 @@ export function IntegrationSettingsTab({
           </h3>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div className="space-y-1.5">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-4 items-end">
+          <div className="md:col-span-6 space-y-1.5">
             <label className="text-xs font-semibold uppercase tracking-wider text-slate-500">
               Spreadsheet ID
             </label>
@@ -86,7 +112,7 @@ export function IntegrationSettingsTab({
             />
           </div>
 
-          <div className="space-y-1.5">
+          <div className="md:col-span-4 space-y-1.5">
             <label className="text-xs font-semibold uppercase tracking-wider text-slate-500">
               Sheet Tab Name
             </label>
@@ -98,7 +124,30 @@ export function IntegrationSettingsTab({
               className="w-full rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 px-3.5 py-2 text-sm text-slate-900 dark:text-white"
             />
           </div>
+
+          <div className="md:col-span-2">
+            <Button
+              type="button"
+              variant="outline"
+              size="md"
+              className="w-full text-xs font-semibold"
+              disabled={!spreadsheetId.trim() || isFetchingHeaders}
+              isLoading={isFetchingHeaders}
+              onClick={handleFetchHeaders}
+              title="Fetch existing column headers from Row 1"
+            >
+              <RefreshCw className="w-3.5 h-3.5 mr-1" />
+              Fetch Headers
+            </Button>
+          </div>
         </div>
+
+        {headerMessage && (
+          <div className="text-xs flex items-center gap-1.5 p-2 rounded-lg bg-blue-50 dark:bg-blue-950/40 text-blue-700 dark:text-blue-300 border border-blue-100 dark:border-blue-900">
+            <CheckCircle2 className="w-3.5 h-3.5 text-blue-600 shrink-0" />
+            <span>{headerMessage}</span>
+          </div>
+        )}
 
         {/* Dynamic Column Mapping Matrix */}
         <div className="space-y-3 pt-2">
@@ -138,6 +187,7 @@ export function IntegrationSettingsTab({
                       <ArrowRight className="w-3.5 h-3.5 text-slate-400 shrink-0" />
                       <input
                         type="text"
+                        list="fetched-headers-list"
                         value={currentMapped}
                         onChange={(e) => handleMappingChange(f.fieldKey, e.target.value)}
                         placeholder="Sheet Column Header"
@@ -156,6 +206,14 @@ export function IntegrationSettingsTab({
               Values beginning with <code>=</code>, <code>+</code>, <code>-</code>, or <code>@</code> are automatically escaped with an apostrophe to prevent spreadsheet formula injection.
             </span>
           </div>
+
+          {fetchedHeaders.length > 0 && (
+            <datalist id="fetched-headers-list">
+              {fetchedHeaders.map((h, i) => (
+                <option key={i} value={h} />
+              ))}
+            </datalist>
+          )}
         </div>
       </Card>
     </div>
