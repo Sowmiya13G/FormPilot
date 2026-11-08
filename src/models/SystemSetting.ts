@@ -41,9 +41,14 @@ const SystemSettingSchema = new Schema<ISystemSettingDocument>(
   }
 );
 
-export const SystemSetting: Model<ISystemSettingDocument> =
+import { createModelProxy } from '@/lib/db/model-proxy';
+
+const RawSystemSetting: Model<ISystemSettingDocument> =
   mongoose.models.SystemSetting ||
   mongoose.model<ISystemSettingDocument>('SystemSetting', SystemSettingSchema);
+
+export const SystemSetting: Model<ISystemSettingDocument> =
+  createModelProxy<ISystemSettingDocument>('system_settings', RawSystemSetting);
 
 export default SystemSetting;
 

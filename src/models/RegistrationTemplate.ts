@@ -186,9 +186,14 @@ const RegistrationTemplateSchema = new Schema<IRegistrationTemplateDocument>(
   }
 );
 
-export const RegistrationTemplate: Model<IRegistrationTemplateDocument> =
+import { createModelProxy } from '@/lib/db/model-proxy';
+
+const RawRegistrationTemplate: Model<IRegistrationTemplateDocument> =
   mongoose.models.RegistrationTemplate ||
   mongoose.model<IRegistrationTemplateDocument>('RegistrationTemplate', RegistrationTemplateSchema);
+
+export const RegistrationTemplate: Model<IRegistrationTemplateDocument> =
+  createModelProxy<IRegistrationTemplateDocument>('registration_templates', RawRegistrationTemplate);
 
 export default RegistrationTemplate;
 

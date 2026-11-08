@@ -1,0 +1,24 @@
+[
+  {
+    "_id": "14ca3c1ec197c56b0121357b",
+    "createdAt": "2026-11-08T12:26:21.800Z",
+    "updatedAt": "2026-11-08T12:26:21.800Z",
+    "email": "admin@wonderla.com",
+    "name": "admin",
+    "role": "ADMIN",
+    "active": true,
+    "authProvider": "google",
+    "createdBy": "cli-seed"
+  },
+  {
+    "_id": "beabdde7b9deb62f7915f3dc",
+    "createdAt": "2026-11-08T12:26:21.803Z",
+    "updatedAt": "2026-11-08T12:26:21.803Z",
+    "email": "owner@wonderla.com",
+    "name": "owner",
+    "role": "ADMIN",
+    "active": true,
+    "authProvider": "google",
+    "createdBy": "cli-seed"
+  }
+]

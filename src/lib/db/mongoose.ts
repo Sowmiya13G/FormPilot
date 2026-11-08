@@ -1,6 +1,7 @@
 import mongoose from 'mongoose';
+import { isLocalMode } from './config';
 
-const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/registration_platform';
+const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/formpilot_db';
 
 interface MongooseCache {
   conn: typeof mongoose | null;
@@ -8,6 +9,7 @@ interface MongooseCache {
 }
 
 declare global {
+  // eslint-disable-next-line no-var
   var mongooseCache: MongooseCache | undefined;
 }
 
@@ -18,6 +20,11 @@ if (!global.mongooseCache) {
 }
 
 export async function connectToDatabase(): Promise<typeof mongoose> {
+  // In local data mode, bypass MongoDB connection entirely
+  if (isLocalMode()) {
+    return mongoose;
+  }
+
   if (cached.conn) {
     return cached.conn;
   }
@@ -26,6 +33,7 @@ export async function connectToDatabase(): Promise<typeof mongoose> {
     const opts: mongoose.ConnectOptions = {
       bufferCommands: false,
       maxPoolSize: 10,
+      serverSelectionTimeoutMS: 3000,
     };
 
     cached.promise = mongoose.connect(MONGODB_URI, opts).then((m) => {
@@ -37,7 +45,11 @@ export async function connectToDatabase(): Promise<typeof mongoose> {
     cached.conn = await cached.promise;
   } catch (e) {
     cached.promise = null;
-    throw e;
+    console.warn(
+      '⚠️ MongoDB connection failed. Falling back to local data mode (./data/*.json). Error:',
+      (e as Error).message
+    );
+    return mongoose;
   }
 
   return cached.conn;

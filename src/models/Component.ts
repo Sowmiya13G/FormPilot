@@ -158,8 +158,15 @@ const ComponentSchema = new Schema<IComponentDocument>(
   }
 );
 
-export const Component: Model<IComponentDocument> =
+import { createModelProxy } from '@/lib/db/model-proxy';
+
+const RawComponent: Model<IComponentDocument> =
   mongoose.models.Component || mongoose.model<IComponentDocument>('Component', ComponentSchema);
+
+export const Component: Model<IComponentDocument> = createModelProxy<IComponentDocument>(
+  'components',
+  RawComponent
+);
 
 export default Component;
 

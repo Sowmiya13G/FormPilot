@@ -108,9 +108,14 @@ const EmailCampaignSchema = new Schema<IEmailCampaignDocument>(
   }
 );
 
-export const EmailCampaign: Model<IEmailCampaignDocument> =
+import { createModelProxy } from '@/lib/db/model-proxy';
+
+const RawEmailCampaign: Model<IEmailCampaignDocument> =
   mongoose.models.EmailCampaign ||
   mongoose.model<IEmailCampaignDocument>('EmailCampaign', EmailCampaignSchema);
+
+export const EmailCampaign: Model<IEmailCampaignDocument> =
+  createModelProxy<IEmailCampaignDocument>('email_campaigns', RawEmailCampaign);
 
 export default EmailCampaign;
 

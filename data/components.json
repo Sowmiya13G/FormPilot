@@ -1,0 +1,259 @@
+[
+  {
+    "_id": "40367112e4871ade3dacf10f",
+    "createdAt": "2026-11-08T12:26:13.846Z",
+    "updatedAt": "2026-11-08T12:28:04.874Z",
+    "key": "employeeName",
+    "label": "Customer / Employee Name",
+    "type": "text",
+    "category": "Personal Details",
+    "placeholder": "Enter full name",
+    "helpText": "Primary attendee full name",
+    "defaultRequired": true
+  },
+  {
+    "_id": "210ad7564103f496621114c6",
+    "createdAt": "2026-11-08T12:26:13.851Z",
+    "updatedAt": "2026-11-08T12:28:04.877Z",
+    "key": "companyName",
+    "label": "Company Name",
+    "type": "text",
+    "category": "Personal Details",
+    "placeholder": "Enter company or organization name",
+    "defaultRequired": true
+  },
+  {
+    "_id": "4b5fc4c2aac74fd94ca9feea",
+    "createdAt": "2026-11-08T12:26:13.851Z",
+    "updatedAt": "2026-11-08T12:28:04.879Z",
+    "key": "designation",
+    "label": "Designation",
+    "type": "text",
+    "category": "Personal Details",
+    "placeholder": "Enter job designation / title",
+    "defaultRequired": true
+  },
+  {
+    "_id": "428f695bb883ef5df0f2067b",
+    "createdAt": "2026-11-08T12:26:13.852Z",
+    "updatedAt": "2026-11-08T12:28:04.880Z",
+    "key": "email",
+    "label": "Email Address",
+    "type": "email",
+    "category": "Personal Details",
+    "placeholder": "name@company.com",
+    "helpText": "Official email for event passes and confirmations",
+    "defaultRequired": true
+  },
+  {
+    "_id": "8f9cecab1f266cbc15ec579c",
+    "createdAt": "2026-11-08T12:26:13.852Z",
+    "updatedAt": "2026-11-08T12:28:04.881Z",
+    "key": "mobileNumber",
+    "label": "Mobile Number",
+    "type": "tel",
+    "category": "Personal Details",
+    "placeholder": "9876543210",
+    "helpText": "10-digit Indian mobile number",
+    "defaultRequired": true,
+    "validationConfig": {
+      "pattern": "^[6-9]\\d{9}$",
+      "patternMessage": "Please enter a valid 10-digit Indian mobile number starting with 6, 7, 8, or 9"
+    }
+  },
+  {
+    "_id": "1aed2b69a9a2da599079afc8",
+    "createdAt": "2026-11-08T12:26:13.853Z",
+    "updatedAt": "2026-11-08T12:28:04.882Z",
+    "key": "cabRequired",
+    "label": "Cab Required",
+    "type": "radio",
+    "category": "Travel & Stay",
+    "defaultRequired": true,
+    "options": [
+      {
+        "label": "Yes",
+        "value": "Yes"
+      },
+      {
+        "label": "No",
+        "value": "No"
+      }
+    ]
+  },
+  {
+    "_id": "c407f926d40ccba07f23ec04",
+    "createdAt": "2026-11-08T12:26:13.853Z",
+    "updatedAt": "2026-11-08T12:28:04.883Z",
+    "key": "pickupAddress",
+    "label": "Pickup Address",
+    "type": "textarea",
+    "category": "Travel & Stay",
+    "placeholder": "Enter complete residential / office pickup address for cab pickup",
+    "helpText": "Required if cab service is requested",
+    "defaultRequired": false
+  },
+  {
+    "_id": "6a1725e06cd23bf4d28b9ed1",
+    "createdAt": "2026-11-08T12:26:13.853Z",
+    "updatedAt": "2026-11-08T12:28:04.884Z",
+    "key": "spouseName",
+    "label": "Spouse / Partner Name",
+    "type": "text",
+    "category": "Personal Details",
+    "placeholder": "Enter spouse/partner full name if attending",
+    "helpText": "Leave blank if attending alone",
+    "defaultRequired": false
+  },
+  {
+    "_id": "29a854a65454340edb3774f0",
+    "createdAt": "2026-11-08T12:26:13.854Z",
+    "updatedAt": "2026-11-08T12:28:04.885Z",
+    "key": "spouseHeightEligibility",
+    "label": "Spouse Height Eligibility",
+    "type": "select",
+    "category": "Personal Details",
+    "defaultRequired": false,
+    "options": [
+      {
+        "label": "ABOVE 75 CM",
+        "value": "ABOVE 75 CM"
+      },
+      {
+        "label": "BELOW 75 CM",
+        "value": "BELOW 75 CM"
+      }
+    ]
+  },
+  {
+    "_id": "39a0550fe19de0c224048920",
+    "createdAt": "2026-11-08T12:26:13.854Z",
+    "updatedAt": "2026-11-08T12:28:04.886Z",
+    "key": "spouseTicketRequired",
+    "label": "Spouse Ticket Required",
+    "type": "radio",
+    "category": "Personal Details",
+    "defaultRequired": false,
+    "options": [
+      {
+        "label": "Yes",
+        "value": "Yes"
+      },
+      {
+        "label": "No",
+        "value": "No"
+      }
+    ]
+  },
+  {
+    "_id": "134bec906ce49332e274e52a",
+    "createdAt": "2026-11-08T12:26:13.855Z",
+    "updatedAt": "2026-11-08T12:28:04.887Z",
+    "key": "employeeIdCard",
+    "label": "Employee ID Card",
+    "type": "file",
+    "category": "ID & Verification",
+    "helpText": "Upload valid employee ID or company badge (Max 5MB, JPG/PNG/PDF)",
+    "defaultRequired": true,
+    "validationConfig": {
+      "maxFileSize": 5242880,
+      "allowedFileTypes": [
+        ".jpg",
+        ".jpeg",
+        ".png",
+        ".pdf"
+      ]
+    }
+  },
+  {
+    "_id": "5832357ad80ecbd25305206d",
+    "createdAt": "2026-11-08T12:26:13.855Z",
+    "updatedAt": "2026-11-08T12:28:04.887Z",
+    "key": "spouseIdCard",
+    "label": "Spouse / Partner ID Card",
+    "type": "file",
+    "category": "ID & Verification",
+    "helpText": "Upload valid ID proof for spouse/partner (Max 5MB, JPG/PNG/PDF)",
+    "defaultRequired": false,
+    "validationConfig": {
+      "maxFileSize": 5242880,
+      "allowedFileTypes": [
+        ".jpg",
+        ".jpeg",
+        ".png",
+        ".pdf"
+      ]
+    }
+  },
+  {
+    "_id": "54f8a7ebdbeae11d244a88e4",
+    "createdAt": "2026-11-08T12:26:13.855Z",
+    "updatedAt": "2026-11-08T12:28:04.889Z",
+    "key": "employeeHeightEligibility",
+    "label": "Employee Height Eligibility",
+    "type": "select",
+    "category": "Personal Details",
+    "defaultRequired": true,
+    "options": [
+      {
+        "label": "ABOVE 75 CM",
+        "value": "ABOVE 75 CM"
+      },
+      {
+        "label": "BELOW 75 CM",
+        "value": "BELOW 75 CM"
+      }
+    ]
+  },
+  {
+    "_id": "02d82404a3c5844ae3b345e4",
+    "createdAt": "2026-11-08T12:26:13.855Z",
+    "updatedAt": "2026-11-08T12:28:04.890Z",
+    "key": "employeeTicketRequired",
+    "label": "Employee Ticket Required",
+    "type": "radio",
+    "category": "Personal Details",
+    "defaultRequired": true,
+    "options": [
+      {
+        "label": "Yes",
+        "value": "Yes"
+      },
+      {
+        "label": "No",
+        "value": "No"
+      }
+    ]
+  },
+  {
+    "_id": "98b84dfaf1d7cdbf768d1743",
+    "createdAt": "2026-11-08T12:26:13.856Z",
+    "updatedAt": "2026-11-08T12:28:04.891Z",
+    "key": "bringingKids",
+    "label": "Are you bringing kids?",
+    "type": "radio",
+    "category": "Family & Kids",
+    "defaultRequired": true,
+    "options": [
+      {
+        "label": "Yes",
+        "value": "Yes"
+      },
+      {
+        "label": "No",
+        "value": "No"
+      }
+    ]
+  },
+  {
+    "_id": "04d31da861e641b40cd8370b",
+    "createdAt": "2026-11-08T12:26:13.856Z",
+    "updatedAt": "2026-11-08T12:28:04.892Z",
+    "key": "kids",
+    "label": "Kids Details (Max 3 children)",
+    "type": "repeatable",
+    "category": "Family & Kids",
+    "helpText": "Provide child name, age (0–17), height eligibility, and ticket requirement for each child.",
+    "defaultRequired": false
+  }
+]

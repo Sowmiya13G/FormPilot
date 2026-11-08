@@ -64,8 +64,12 @@ const UserSchema = new Schema<IUserDocument>(
   }
 );
 
-export const User: Model<IUserDocument> =
+import { createModelProxy } from '@/lib/db/model-proxy';
+
+const RawUser: Model<IUserDocument> =
   mongoose.models.User || mongoose.model<IUserDocument>('User', UserSchema);
+
+export const User: Model<IUserDocument> = createModelProxy<IUserDocument>('users', RawUser);
 
 export default User;
 

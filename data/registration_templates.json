@@ -1,0 +1,234 @@
+[
+  {
+    "_id": "ccfe0c77198ca887156d03b8",
+    "createdAt": "2026-11-08T12:26:13.857Z",
+    "updatedAt": "2026-11-08T12:28:04.894Z",
+    "eventName": "Wonderla BANDHAN 13.2",
+    "slug": "wonderla-bandhan-13-2",
+    "description": "Official Registration & Ticket Management for Wonderla BANDHAN 13.2 Event",
+    "theme": {
+      "primaryColor": "#0284c7",
+      "backgroundColor": "#ffffff",
+      "bannerImageUrl": "https://images.unsplash.com/photo-1513889961551-628c1e5e2ee9?q=80&w=1200&auto=format&fit=crop",
+      "fontFamily": "Inter, sans-serif"
+    },
+    "allowedOrigins": [
+      "http://localhost:3000",
+      "http://localhost:5500"
+    ],
+    "sheetTabId": "Registrations",
+    "sheetMapping": {
+      "employeeName": "Customer / Employee Name",
+      "companyName": "Company Name",
+      "designation": "Designation",
+      "email": "Email",
+      "mobileNumber": "Mobile Number",
+      "cabRequired": "Cab Required",
+      "pickupAddress": "Pickup Address",
+      "employeeHeightEligibility": "Employee Height Eligibility",
+      "employeeTicketRequired": "Employee Ticket Required",
+      "spouseName": "Spouse / Partner Name",
+      "spouseHeightEligibility": "Spouse Height Eligibility",
+      "spouseTicketRequired": "Spouse Ticket Required",
+      "bringingKids": "Are you bringing kids?",
+      "totalTickets": "Total Wonderla Tickets"
+    },
+    "fields": [
+      {
+        "componentKey": "employeeName",
+        "fieldKey": "employeeName",
+        "label": "Customer / Employee Name",
+        "placeholder": "Enter full name",
+        "required": true,
+        "order": 0,
+        "width": "full"
+      },
+      {
+        "componentKey": "companyName",
+        "fieldKey": "companyName",
+        "label": "Company Name",
+        "placeholder": "Enter company name",
+        "required": true,
+        "order": 1,
+        "width": "half"
+      },
+      {
+        "componentKey": "designation",
+        "fieldKey": "designation",
+        "label": "Designation",
+        "placeholder": "Enter designation",
+        "required": true,
+        "order": 2,
+        "width": "half"
+      },
+      {
+        "componentKey": "email",
+        "fieldKey": "email",
+        "label": "Email Address",
+        "placeholder": "name@company.com",
+        "required": true,
+        "order": 3,
+        "width": "half"
+      },
+      {
+        "componentKey": "mobileNumber",
+        "fieldKey": "mobileNumber",
+        "label": "Mobile Number",
+        "placeholder": "9876543210",
+        "helpText": "10-digit Indian mobile number",
+        "required": true,
+        "order": 4,
+        "width": "half"
+      },
+      {
+        "componentKey": "cabRequired",
+        "fieldKey": "cabRequired",
+        "label": "Cab Required",
+        "required": true,
+        "order": 5,
+        "width": "full"
+      },
+      {
+        "componentKey": "pickupAddress",
+        "fieldKey": "pickupAddress",
+        "label": "Pickup Address",
+        "placeholder": "Enter complete residential / office pickup address",
+        "required": true,
+        "order": 6,
+        "width": "full",
+        "conditionalConfig": {
+          "action": "show",
+          "matchType": "all",
+          "rules": [
+            {
+              "fieldKey": "cabRequired",
+              "operator": "equals",
+              "value": "Yes"
+            }
+          ]
+        }
+      },
+      {
+        "componentKey": "employeeIdCard",
+        "fieldKey": "employeeIdCard",
+        "label": "Employee ID Card",
+        "helpText": "Upload valid employee ID (JPG, PNG, or PDF up to 5MB)",
+        "required": true,
+        "order": 7,
+        "width": "full"
+      },
+      {
+        "componentKey": "employeeHeightEligibility",
+        "fieldKey": "employeeHeightEligibility",
+        "label": "Employee Height Eligibility",
+        "required": true,
+        "order": 8,
+        "width": "half"
+      },
+      {
+        "componentKey": "employeeTicketRequired",
+        "fieldKey": "employeeTicketRequired",
+        "label": "Employee Ticket Required",
+        "required": true,
+        "order": 9,
+        "width": "half"
+      },
+      {
+        "componentKey": "spouseName",
+        "fieldKey": "spouseName",
+        "label": "Spouse / Partner Name",
+        "placeholder": "Enter spouse name if attending (optional)",
+        "required": false,
+        "order": 10,
+        "width": "full"
+      },
+      {
+        "componentKey": "spouseIdCard",
+        "fieldKey": "spouseIdCard",
+        "label": "Spouse / Partner ID Card",
+        "helpText": "Upload valid ID proof for spouse/partner (JPG, PNG, or PDF up to 5MB)",
+        "required": true,
+        "order": 11,
+        "width": "full",
+        "conditionalConfig": {
+          "action": "show",
+          "matchType": "all",
+          "rules": [
+            {
+              "fieldKey": "spouseName",
+              "operator": "isNotEmpty"
+            }
+          ]
+        }
+      },
+      {
+        "componentKey": "spouseHeightEligibility",
+        "fieldKey": "spouseHeightEligibility",
+        "label": "Spouse Height Eligibility",
+        "required": false,
+        "order": 12,
+        "width": "half",
+        "conditionalConfig": {
+          "action": "show",
+          "matchType": "all",
+          "rules": [
+            {
+              "fieldKey": "spouseName",
+              "operator": "isNotEmpty"
+            }
+          ]
+        }
+      },
+      {
+        "componentKey": "spouseTicketRequired",
+        "fieldKey": "spouseTicketRequired",
+        "label": "Spouse Ticket Required",
+        "required": true,
+        "order": 13,
+        "width": "half",
+        "conditionalConfig": {
+          "action": "show",
+          "matchType": "all",
+          "rules": [
+            {
+              "fieldKey": "spouseName",
+              "operator": "isNotEmpty"
+            }
+          ]
+        }
+      },
+      {
+        "componentKey": "bringingKids",
+        "fieldKey": "bringingKids",
+        "label": "Are you bringing kids?",
+        "required": true,
+        "order": 14,
+        "width": "full"
+      },
+      {
+        "componentKey": "kids",
+        "fieldKey": "kids",
+        "label": "Kids Details (Max 3 children)",
+        "helpText": "Provide child name, age (0–17), height eligibility, and ticket requirement.",
+        "required": false,
+        "order": 15,
+        "width": "full",
+        "conditionalConfig": {
+          "action": "show",
+          "matchType": "all",
+          "rules": [
+            {
+              "fieldKey": "bringingKids",
+              "operator": "equals",
+              "value": "Yes"
+            }
+          ]
+        }
+      }
+    ],
+    "status": "PUBLISHED",
+    "version": 1,
+    "publishedAt": "2026-11-08T12:26:13.857Z",
+    "createdBy": "system-seed"
+  }
+]

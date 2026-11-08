@@ -57,8 +57,13 @@ const AuditLogSchema = new Schema<IAuditLogDocument>(
   }
 );
 
-export const AuditLog: Model<IAuditLogDocument> =
+import { createModelProxy } from '@/lib/db/model-proxy';
+
+const RawAuditLog: Model<IAuditLogDocument> =
   mongoose.models.AuditLog || mongoose.model<IAuditLogDocument>('AuditLog', AuditLogSchema);
+
+export const AuditLog: Model<IAuditLogDocument> =
+  createModelProxy<IAuditLogDocument>('audit_logs', RawAuditLog);
 
 export default AuditLog;
 

@@ -90,9 +90,14 @@ const IntegrationSchema = new Schema<IIntegrationDocument>(
   }
 );
 
-export const Integration: Model<IIntegrationDocument> =
+import { createModelProxy } from '@/lib/db/model-proxy';
+
+const RawIntegration: Model<IIntegrationDocument> =
   mongoose.models.Integration ||
   mongoose.model<IIntegrationDocument>('Integration', IntegrationSchema);
+
+export const Integration: Model<IIntegrationDocument> =
+  createModelProxy<IIntegrationDocument>('integrations', RawIntegration);
 
 export default Integration;
 

@@ -1,0 +1,46 @@
+[
+  {
+    "_id": "08964986556e4ae144b4257c",
+    "createdAt": "2026-11-08T12:27:56.758Z",
+    "updatedAt": "2026-11-08T12:27:56.758Z",
+    "name": "Test Event",
+    "slug": "test-event",
+    "active": true,
+    "data": {
+      "category": "VIP",
+      "capacity": 100
+    }
+  },
+  {
+    "_id": "19398deb1ca8b67b4bd43683",
+    "createdAt": "2026-11-08T12:27:56.762Z",
+    "updatedAt": "2026-11-08T12:27:56.762Z",
+    "name": "Registration 1",
+    "data": {
+      "employeeName": "Alice Johnson",
+      "age": 30
+    }
+  },
+  {
+    "_id": "fe9fde156e1f5c9874ca7639",
+    "createdAt": "2026-11-08T12:27:56.763Z",
+    "updatedAt": "2026-11-08T12:27:56.763Z",
+    "name": "Wonderla Bangalore Trip",
+    "type": "ThemePark"
+  },
+  {
+    "_id": "9448eb70a995633680902dc0",
+    "createdAt": "2026-11-08T12:27:56.764Z",
+    "updatedAt": "2026-11-08T12:27:56.764Z",
+    "key": "food_preference",
+    "label": "Dietary Preference",
+    "category": "Custom"
+  },
+  {
+    "_id": "fc0c95820ea81dbff270c018",
+    "createdAt": "2026-11-08T12:27:56.765Z",
+    "updatedAt": "2026-11-08T12:27:56.765Z",
+    "label": "Updated Label",
+    "status": "PUBLISHED"
+  }
+]
