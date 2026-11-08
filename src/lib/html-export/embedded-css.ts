@@ -390,3 +390,4 @@ export function compileEmbeddedCss(theme: IThemeConfig = {}): string {
 }
 
 export default compileEmbeddedCss;
+

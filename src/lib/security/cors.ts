@@ -75,3 +75,4 @@ export function handleCorsPreflight(
     headers: getCorsHeaders(origin, allowedOrigins),
   });
 }
+

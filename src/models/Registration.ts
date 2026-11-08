@@ -150,3 +150,4 @@ export const Registration: Model<IRegistrationDocument> =
   mongoose.model<IRegistrationDocument>('Registration', RegistrationSchema);
 
 export default Registration;
+
