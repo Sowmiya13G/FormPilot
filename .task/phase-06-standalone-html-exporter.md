@@ -111,12 +111,12 @@ src/
 ---
 
 ## 5. Acceptance Criteria
-- [ ] Exported HTML opens locally in Chrome, Firefox, Safari, and Edge via `file://` or static web server.
-- [ ] Responsive layout adapts flawlessly from 360px mobile to desktop.
-- [ ] All conditional fields (Cab pickup, Spouse ID, Kids block) show/hide properly.
-- [ ] Max 3 kids limitation is strictly enforced in the standalone file.
-- [ ] Ticket summary calculates dynamically in real-time.
-- [ ] Standalone file contains no external CDN script links, no React, and no private server secrets.
-- [ ] File size is lightweight (< 100 KB).
-- [ ] Submissions successfully transmit payload to the platform's public API.
+- [x] Exported HTML opens locally in Chrome, Firefox, Safari, and Edge via `file://` or static web server.
+- [x] Responsive layout adapts flawlessly from 360px mobile to desktop.
+- [x] All conditional fields (Cab pickup, Spouse ID, Kids block) show/hide properly.
+- [x] Max 3 kids limitation is strictly enforced in the standalone file.
+- [x] Ticket summary calculates dynamically in real-time.
+- [x] Standalone file contains no external CDN script links, no React, and no private server secrets.
+- [x] File size is lightweight (< 100 KB).
+- [x] Submissions successfully transmit payload to the platform's public API.
 

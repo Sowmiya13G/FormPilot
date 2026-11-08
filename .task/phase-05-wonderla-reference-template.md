@@ -116,12 +116,12 @@ src/
 ---
 
 ## 5. Acceptance Criteria
-- [ ] Running `npm run seed:wonderla` populates the database with all Wonderla components and the published template.
-- [ ] In the admin UI, Wonderla template opens in the template builder with all fields, order, and rules intact.
-- [ ] In preview mode, toggling `Cab Required` instantly toggles `Pickup Address`.
-- [ ] Entering text in `Spouse / Partner Name` instantly displays `Spouse ID Card` and ticket questions.
-- [ ] Toggling `Are you bringing kids?` to `Yes` reveals the repeatable kids section.
-- [ ] The user can add up to 3 children; the "Add Child" button disables at 3.
-- [ ] Child ages outside 0–17 trigger validation errors.
-- [ ] Ticket summary displays live accurate totals matching the specification formula.
+- [x] Running `npm run seed:wonderla` populates the database with all Wonderla components and the published template.
+- [x] In the admin UI, Wonderla template opens in the template builder with all fields, order, and rules intact.
+- [x] In preview mode, toggling `Cab Required` instantly toggles `Pickup Address`.
+- [x] Entering text in `Spouse / Partner Name` instantly displays `Spouse ID Card` and ticket questions.
+- [x] Toggling `Are you bringing kids?` to `Yes` reveals the repeatable kids section.
+- [x] The user can add up to 3 children; the "Add Child" button disables at 3.
+- [x] Child ages outside 0–17 trigger validation errors.
+- [x] Ticket summary displays live accurate totals matching the specification formula.
 

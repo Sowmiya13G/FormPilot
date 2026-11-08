@@ -29,9 +29,9 @@ export default async function DashboardPage() {
         <div className="relative z-10 max-w-3xl space-y-3">
           <div className="inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1 text-xs font-medium backdrop-blur-sm">
             <Sparkles className="w-3.5 h-3.5" />
-            Registration Management Platform
+            FormPilot &bull; The Registration Hub
           </div>
-          <h1 className="text-3xl font-bold tracking-tight">Welcome to Registration Hub</h1>
+          <h1 className="text-3xl font-bold tracking-tight">Welcome to FormPilot</h1>
           <p className="text-blue-100 text-sm leading-relaxed">
             Eliminate manual HTML, CSS, and JS development for client events. Assemble reusable form components,
             configure dynamic conditional logic, preview in real time, and export standalone single-file HTML registration

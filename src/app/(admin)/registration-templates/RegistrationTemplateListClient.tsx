@@ -14,6 +14,8 @@ import {
   Layers,
   CheckCircle2,
   AlertCircle,
+  Download,
+  Globe,
 } from 'lucide-react';
 import Button from '@/components/ui/Button';
 import Badge from '@/components/ui/Badge';
@@ -261,10 +263,30 @@ export function RegistrationTemplateListClient({
                     <Link
                       href={`/registration-templates/${template._id}?tab=preview`}
                       className="p-1.5 rounded-lg text-slate-400 hover:text-slate-600 hover:bg-slate-100 transition-colors"
-                      title="Preview Form"
+                      title="Preview Form in Builder"
                     >
                       <Eye className="w-3.5 h-3.5" />
                     </Link>
+
+                    <a
+                      href={`/api/templates/${template._id}/export`}
+                      download={`${template.slug}.html`}
+                      className="p-1.5 rounded-lg text-slate-400 hover:text-blue-600 hover:bg-blue-50 transition-colors"
+                      title="Download Standalone HTML"
+                    >
+                      <Download className="w-3.5 h-3.5" />
+                    </a>
+
+                    {isPublished && (
+                      <Link
+                        href={`/register/${template.slug}`}
+                        target="_blank"
+                        className="p-1.5 rounded-lg text-slate-400 hover:text-emerald-600 hover:bg-emerald-50 transition-colors"
+                        title="Open Live Public Registration Page"
+                      >
+                        <Globe className="w-3.5 h-3.5" />
+                      </Link>
+                    )}
 
                     <button
                       type="button"

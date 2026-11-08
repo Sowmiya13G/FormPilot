@@ -3,8 +3,8 @@ import './globals.css';
 import SessionProvider from '@/components/layout/SessionProvider';
 
 export const metadata: Metadata = {
-  title: 'Registration Hub — Management Platform',
-  description: 'Enterprise Dynamic Registration Management Platform for Wonderla Events',
+  title: 'FormPilot — The Registration Hub',
+  description: 'Enterprise Dynamic Registration Management Platform for Events',
 };
 
 export default function RootLayout({

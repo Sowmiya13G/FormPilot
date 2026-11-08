@@ -17,6 +17,8 @@ import {
   AlertCircle,
   ArrowLeft,
   Settings as SettingsIcon,
+  Download,
+  Code2,
 } from 'lucide-react';
 import Button from '@/components/ui/Button';
 import Badge from '@/components/ui/Badge';
@@ -26,6 +28,7 @@ import FieldConfigModal from '@/components/form-builder/FieldConfigModal';
 import ThemeConfigurator from '@/components/form-builder/ThemeConfigurator';
 import IntegrationSettingsTab from '@/components/form-builder/IntegrationSettingsTab';
 import DynamicFormRenderer from '@/components/dynamic-form/DynamicFormRenderer';
+import { StandalonePreviewModal } from '@/components/form-builder/StandalonePreviewModal';
 import {
   IRegistrationTemplate,
   ITemplateField,
@@ -67,6 +70,7 @@ export function FormBuilder({
   const [configuringField, setConfiguringField] = useState<ITemplateField | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [notification, setNotification] = useState<{ type: 'success' | 'error'; message: string } | null>(null);
+  const [isPreviewModalOpen, setIsPreviewModalOpen] = useState(false);
 
   // Lookup map of components by key for fast lookup
   const componentLookup = React.useMemo(() => {
@@ -244,7 +248,31 @@ export function FormBuilder({
           </div>
         </div>
 
-        <div className="flex items-center gap-3">
+        <div className="flex flex-wrap items-center gap-2">
+          {initialTemplate?._id && (
+            <>
+              <Button
+                variant="outline"
+                size="md"
+                onClick={() => setIsPreviewModalOpen(true)}
+                title="Preview standalone HTML in iframe"
+              >
+                <Code2 className="w-4 h-4 mr-1.5 text-blue-600" />
+                Standalone Preview
+              </Button>
+
+              <a
+                href={`/api/templates/${initialTemplate._id}/export`}
+                download={`${slug || 'registration'}.html`}
+                className="inline-flex items-center justify-center rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 px-3.5 py-2 text-sm font-semibold text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-700 transition shadow-xs"
+                title="Download single-file standalone HTML"
+              >
+                <Download className="w-4 h-4 mr-1.5 text-emerald-600" />
+                Download HTML
+              </a>
+            </>
+          )}
+
           <Button
             variant="outline"
             size="md"
@@ -539,6 +567,16 @@ export function FormBuilder({
         onClose={() => setConfiguringField(null)}
         onSave={handleSaveFieldConfig}
       />
+
+      {/* Standalone HTML Preview Modal */}
+      {initialTemplate?._id && (
+        <StandalonePreviewModal
+          templateId={initialTemplate._id}
+          slug={slug}
+          isOpen={isPreviewModalOpen}
+          onClose={() => setIsPreviewModalOpen(false)}
+        />
+      )}
     </div>
   );
 }

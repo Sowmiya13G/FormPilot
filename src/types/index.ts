@@ -155,3 +155,50 @@ export interface IRegistrationTemplate {
   createdAt: Date;
   updatedAt: Date;
 }
+
+export type RegistrationStatus = 'PENDING' | 'CONFIRMED' | 'REJECTED';
+export type SyncStatus = 'PENDING' | 'SYNCED' | 'FAILED' | 'SKIPPED';
+
+export interface ITicketSummary {
+  employeeTickets: number;
+  spouseTickets: number;
+  kidsTickets: number;
+  kidsAbove75cm: number;
+  kidsBelow75cm: number;
+  totalTickets: number;
+}
+
+export interface IRegistrationFile {
+  fieldKey: string;
+  originalFilename: string;
+  mimeType: string;
+  size: number;
+  driveFileId?: string;
+  driveViewUrl?: string;
+}
+
+export interface IIntegrationError {
+  service: 'SHEETS' | 'DRIVE' | 'SYSTEM';
+  error: string;
+  timestamp: Date;
+}
+
+export interface IRegistration {
+  _id: string;
+  registrationId: string;
+  templateId: string;
+  templateVersion: number;
+  eventName: string;
+  data: Record<string, unknown>;
+  files?: IRegistrationFile[];
+  ticketSummary: ITicketSummary;
+  status: RegistrationStatus;
+  idempotencyKey: string;
+  sheetsSyncStatus: 'PENDING' | 'SYNCED' | 'FAILED';
+  driveSyncStatus: 'PENDING' | 'SYNCED' | 'FAILED' | 'SKIPPED';
+  integrationErrors?: IIntegrationError[];
+  sourceOrigin?: string;
+  ipAddress?: string;
+  createdAt: Date;
+  updatedAt: Date;
+}

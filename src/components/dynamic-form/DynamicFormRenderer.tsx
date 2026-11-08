@@ -12,6 +12,8 @@ interface DynamicFormRendererProps {
   fields: ITemplateField[];
   theme?: IThemeConfig;
   eventName: string;
+  slug?: string;
+  templateId?: string;
   description?: string;
   componentLookup?: Record<string, IComponent>;
   onSubmitSimulation?: (values: Record<string, unknown>) => void;
@@ -21,6 +23,8 @@ export function DynamicFormRenderer({
   fields,
   theme = {},
   eventName,
+  slug,
+  templateId,
   description,
   componentLookup = {},
   onSubmitSimulation,
@@ -28,6 +32,14 @@ export function DynamicFormRenderer({
   const [formValues, setFormValues] = useState<Record<string, unknown>>({});
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [submitted, setSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [confirmedRegistrationId, setConfirmedRegistrationId] = useState<string | null>(null);
+  const [apiError, setApiError] = useState<string | null>(null);
+  const [idempotencyKey] = useState(() =>
+    typeof crypto !== 'undefined' && crypto.randomUUID
+      ? crypto.randomUUID()
+      : `idemp-${Date.now()}-${Math.random().toString(36).substring(2, 9)}`
+  );
 
   // Handle value change with conditional field clearing
   const handleValueChange = (fieldKey: string, val: unknown) => {
@@ -67,7 +79,7 @@ export function DynamicFormRenderer({
 
   const totalTickets = calcEmployeeTickets + calcSpouseTickets + calcKidsTickets;
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const newErrors: Record<string, string> = {};
 
@@ -86,8 +98,51 @@ export function DynamicFormRenderer({
       return;
     }
 
-    setSubmitted(true);
-    onSubmitSimulation?.(formValues);
+    if (onSubmitSimulation) {
+      setSubmitted(true);
+      onSubmitSimulation(formValues);
+      return;
+    }
+
+    if (slug || templateId) {
+      setIsSubmitting(true);
+      setApiError(null);
+      try {
+        const res = await fetch('/api/public/registrations', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'X-Idempotency-Key': idempotencyKey,
+          },
+          body: JSON.stringify({
+            slug,
+            templateId,
+            idempotencyKey,
+            data: formValues,
+          }),
+        });
+
+        const data = await res.json();
+        if (!res.ok) {
+          if (data.errors) {
+            setErrors(data.errors);
+            setApiError('Please fix the errors indicated on the form.');
+          } else {
+            setApiError(data.error || 'Failed to submit registration');
+          }
+          return;
+        }
+
+        setConfirmedRegistrationId(data.registrationId);
+        setSubmitted(true);
+      } catch (err) {
+        setApiError(err instanceof Error ? err.message : 'Network error submitting registration');
+      } finally {
+        setIsSubmitting(false);
+      }
+    } else {
+      setSubmitted(true);
+    }
   };
 
   const primaryColor = theme.primaryColor || '#2563eb';
@@ -127,16 +182,25 @@ export function DynamicFormRenderer({
                 <CheckCircle2 className="w-10 h-10" />
               </div>
               <h3 className="text-xl font-bold text-slate-900 dark:text-white">
-                Registration Received!
+                Registration Confirmed!
               </h3>
               <p className="text-sm text-slate-500 max-w-sm mx-auto">
-                Thank you! Your event registration has been submitted successfully. Total Tickets Booked: <strong>{totalTickets}</strong>.
+                Thank you! Your event registration has been received and verified.
+                {confirmedRegistrationId && (
+                  <span className="block mt-2 font-mono text-sm font-bold text-blue-600 dark:text-blue-400">
+                    ID: {confirmedRegistrationId}
+                  </span>
+                )}
+                <span className="block mt-1">
+                  Total Tickets Booked: <strong>{totalTickets}</strong>.
+                </span>
               </p>
               <Button
                 variant="outline"
                 size="sm"
                 onClick={() => {
                   setSubmitted(false);
+                  setConfirmedRegistrationId(null);
                   setFormValues({});
                 }}
               >
@@ -145,6 +209,15 @@ export function DynamicFormRenderer({
             </div>
           ) : (
             <form onSubmit={handleSubmit} className="space-y-6">
+              {apiError && (
+                <div className="rounded-xl bg-rose-50 dark:bg-rose-950/40 border border-rose-200 dark:border-rose-900 p-4 flex items-start gap-3">
+                  <AlertCircle className="w-5 h-5 text-rose-600 shrink-0 mt-0.5" />
+                  <p className="text-xs font-semibold text-rose-800 dark:text-rose-200">
+                    {apiError}
+                  </p>
+                </div>
+              )}
+
               {Object.keys(errors).length > 0 && (
                 <div className="rounded-xl bg-rose-50 dark:bg-rose-950/40 border border-rose-200 dark:border-rose-900 p-4 flex items-start gap-3">
                   <AlertCircle className="w-5 h-5 text-rose-600 shrink-0 mt-0.5" />
@@ -221,10 +294,11 @@ export function DynamicFormRenderer({
               <div className="pt-4 border-t border-slate-100 dark:border-slate-800">
                 <button
                   type="submit"
-                  className="w-full py-3 px-6 rounded-xl font-bold text-white shadow-md transition-opacity hover:opacity-95 focus:outline-none focus:ring-4 focus:ring-blue-300 cursor-pointer"
+                  disabled={isSubmitting}
+                  className="w-full py-3 px-6 rounded-xl font-bold text-white shadow-md transition-opacity hover:opacity-95 focus:outline-hidden focus:ring-4 focus:ring-blue-300 cursor-pointer disabled:opacity-50"
                   style={{ backgroundColor: primaryColor }}
                 >
-                  Submit Registration
+                  {isSubmitting ? 'Submitting Registration...' : 'Submit Registration'}
                 </button>
               </div>
             </form>

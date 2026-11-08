@@ -38,11 +38,11 @@ export function AdminSidebar() {
       {/* Brand Header */}
       <div className="h-16 flex items-center px-6 border-b border-slate-800 gap-3">
         <div className="w-8 h-8 rounded-lg bg-blue-600 flex items-center justify-center font-bold text-white shadow-xs">
-          R
+          FP
         </div>
         <div className="flex flex-col">
-          <span className="font-semibold text-white tracking-tight leading-tight">Registration Hub</span>
-          <span className="text-xs text-slate-400">Admin Platform</span>
+          <span className="font-semibold text-white tracking-tight leading-tight">FormPilot</span>
+          <span className="text-xs text-slate-400">The Registration Hub</span>
         </div>
       </div>
 
@@ -72,7 +72,7 @@ export function AdminSidebar() {
 
       {/* Bottom Footer Note */}
       <div className="p-4 border-t border-slate-800 text-xs text-slate-500">
-        Registration Management v0.1.0
+        FormPilot v0.1.0 &bull; The Registration Hub
       </div>
     </aside>
   );

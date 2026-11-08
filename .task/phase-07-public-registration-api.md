@@ -124,10 +124,10 @@ Define `Registration` schema:
 ---
 
 ## 4. Acceptance Criteria
-- [ ] Submitting the standalone HTML form posts to `/api/public/registrations` and creates a document in MongoDB.
-- [ ] Duplicate submissions with the same idempotency key are de-duplicated without creating duplicate records.
-- [ ] Server recalculates and overrides ticket totals correctly.
-- [ ] Invalid mobile numbers or children over age 17 return HTTP 400 with field-specific errors.
-- [ ] Admin can view submitted registrations in the admin dashboard.
-- [ ] CORS headers are appropriately emitted based on template configuration.
+- [x] Submitting the standalone HTML form posts to `/api/public/registrations` and creates a document in MongoDB.
+- [x] Duplicate submissions with the same idempotency key are de-duplicated without creating duplicate records.
+- [x] Server recalculates and overrides ticket totals correctly.
+- [x] Invalid mobile numbers or children over age 17 return HTTP 400 with field-specific errors.
+- [x] Admin can view submitted registrations in the admin dashboard.
+- [x] CORS headers are appropriately emitted based on template configuration.
 
