@@ -1,5 +1,5 @@
 import NextAuth, { type DefaultSession } from 'next-auth';
-import Google from 'next-auth/providers/google';
+import { authConfig } from '@/auth.config';
 import connectToDatabase from '@/lib/db/mongoose';
 import User from '@/models/User';
 import { Role } from '@/types';
@@ -25,19 +25,7 @@ declare module '@auth/core/jwt' {
 }
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
-  providers: [
-    Google({
-      clientId: process.env.AUTH_GOOGLE_ID || process.env.GOOGLE_CLIENT_ID || '',
-      clientSecret: process.env.AUTH_GOOGLE_SECRET || process.env.GOOGLE_CLIENT_SECRET || '',
-    }),
-  ],
-  pages: {
-    signIn: '/login',
-    error: '/login',
-  },
-  session: {
-    strategy: 'jwt',
-  },
+  ...authConfig,
   callbacks: {
     async signIn({ user, account }) {
       if (!user.email) return false;
@@ -120,5 +108,4 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       return session;
     },
   },
-  trustHost: true,
 });
