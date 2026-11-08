@@ -86,7 +86,10 @@ export async function handleGoogleOAuthCallback(code: string) {
 /**
  * Returns an authenticated OAuth2 client with auto-refresh configured
  */
-export async function getAuthenticatedGoogleClient() {
+export async function getAuthenticatedGoogleClient(
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  _serviceName?: 'drive' | 'sheets' | 'gmail'
+) {
   const oauth2Client = createOAuth2Client();
 
   // 1. Try loading credentials from database

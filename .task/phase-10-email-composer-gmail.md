@@ -140,10 +140,10 @@ Define `EmailCampaign` schema:
 ---
 
 ## 4. Acceptance Criteria
-- [ ] Admin can compose an email with a clickable banner image linking to the registration URL.
-- [ ] Clicking "Send Test" sends an email to the test address via the connected Gmail account.
-- [ ] Sent emails appear in the authenticated admin's Gmail "Sent" folder.
-- [ ] Fallback alt text and action button render properly even if image loading is disabled.
-- [ ] Multi-recipient sends do NOT expose the entire attendee email list to recipients.
-- [ ] Campaign history table displays previous campaigns with status, recipient count, and errors.
+- [x] Admin can compose an email with a clickable banner image linking to the registration URL.
+- [x] Clicking "Send Test" sends an email to the test address via the connected Gmail account.
+- [x] Sent emails appear in the authenticated admin's Gmail "Sent" folder.
+- [x] Fallback alt text and action button render properly even if image loading is disabled.
+- [x] Multi-recipient sends do NOT expose the entire attendee email list to recipients.
+- [x] Campaign history table displays previous campaigns with status, recipient count, and errors.
 

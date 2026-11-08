@@ -102,11 +102,11 @@ README.md                              # Local setup and usage guide
 ---
 
 ## 4. Acceptance Criteria
-- [ ] All Vitest unit tests pass (`npm run test:unit`).
-- [ ] Integration tests pass against local or test MongoDB.
-- [ ] Playwright E2E tests pass for the standalone form flow.
-- [ ] `npm run build` succeeds with zero errors.
-- [ ] `npm run lint` completes with zero errors.
-- [ ] Complete documentation is in place (`README.md`, `SECURITY.md`, `.env.example`).
-- [ ] Zero placeholder pages, dead buttons, or mock APIs remain in the codebase.
+- [x] All Vitest unit tests pass (`npm run test:unit`).
+- [x] Integration tests pass against local or test MongoDB.
+- [x] Playwright E2E tests pass for the standalone form flow.
+- [x] `npm run build` succeeds with zero errors.
+- [x] `npm run lint` completes with zero errors.
+- [x] Complete documentation is in place (`README.md`, `SECURITY.md`, `.env.example`).
+- [x] Zero placeholder pages, dead buttons, or mock APIs remain in the codebase.
 

@@ -107,9 +107,9 @@ Define `Integration` schema:
 ---
 
 ## 4. Acceptance Criteria
-- [ ] Admin can initiate Google Workspace OAuth connection flow and store encrypted tokens.
-- [ ] Clicking "Test Connection" for Drive, Sheets, and Gmail returns real live diagnostic statuses.
-- [ ] Sensitive tokens are never displayed in full in responses or UI.
-- [ ] Global settings (signature, upload size limit, public API URL) persist and take effect across the platform.
-- [ ] Audit Log records and displays all administrative modifications.
+- [x] Admin can initiate Google Workspace OAuth connection flow and store encrypted tokens.
+- [x] Clicking "Test Connection" for Drive, Sheets, and Gmail returns real live diagnostic statuses.
+- [x] Sensitive tokens are never displayed in full in responses or UI.
+- [x] Global settings (signature, upload size limit, public API URL) persist and take effect across the platform.
+- [x] Audit Log records and displays all administrative modifications.
 

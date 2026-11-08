@@ -34,11 +34,11 @@ Eliminate manual HTML/CSS/JS form creation for client events by providing a web-
 | **05** | Wonderla BANDHAN 13.2 Master Template | ✅ Completed | Wonderla reference template, repeatable kids (max 3), ticket logic | [Phase 5](./phase-05-wonderla-reference-template.md) |
 | **06** | Standalone HTML Exporter & Form Preview | ✅ Completed | Standalone HTML generator, pure CSS/JS runtime, file download | [Phase 6](./phase-06-standalone-html-exporter.md) |
 | **07** | Public Registration API & Idempotency | ✅ Completed | `/api/public/registrations`, Zod schema, idempotency, MongoDB storage | [Phase 7](./phase-07-public-registration-api.md) |
-| **08** | File Storage & Private Google Drive Integration | ⏳ Pending | Event Drive folder, private ID file upload, secure admin proxy | [Phase 8](./phase-08-google-drive-integration.md) |
-| **09** | Google Sheets Integration & Dynamic Mapping | ⏳ Pending | Header-name column mapping, right-append, formula protection | [Phase 9](./phase-09-google-sheets-integration.md) |
-| **10** | Email Campaign Composer & Gmail Integration | ⏳ Pending | Gmail API send, clickable banner, fallback text, campaign logs | [Phase 10](./phase-10-email-composer-gmail.md) |
-| **11** | Settings, Integrations Hub & Audit Logging | ⏳ Pending | Settings UI, integration test buttons, audit logs, credential crypto | [Phase 11](./phase-11-settings-integrations-audit.md) |
-| **12** | Security Hardening & Automated Testing | ⏳ Pending | Rate limiting, CORS, CSRF, Vitest, Playwright, production build | [Phase 12](./phase-12-security-hardening-testing.md) |
+| **08** | File Storage & Private Google Drive Integration | ✅ Completed | Event Drive folder, private ID file upload, secure admin proxy | [Phase 8](./phase-08-google-drive-integration.md) |
+| **09** | Google Sheets Integration & Dynamic Mapping | ✅ Completed | Header-name column mapping, right-append, formula protection | [Phase 9](./phase-09-google-sheets-integration.md) |
+| **10** | Email Campaign Composer & Gmail Integration | ✅ Completed | Gmail API send, clickable banner, fallback text, campaign logs | [Phase 10](./phase-10-email-composer-gmail.md) |
+| **11** | Settings, Integrations Hub & Audit Logging | ✅ Completed | Settings UI, integration test buttons, audit logs, credential crypto | [Phase 11](./phase-11-settings-integrations-audit.md) |
+| **12** | Security Hardening & Automated Testing | ✅ Completed | Rate limiting, CORS, CSRF, Vitest, Playwright, production build | [Phase 12](./phase-12-security-hardening-testing.md) |
 
 ---
 

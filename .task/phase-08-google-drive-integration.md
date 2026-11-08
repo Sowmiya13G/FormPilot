@@ -81,10 +81,10 @@ src/
 ---
 
 ## 4. Acceptance Criteria
-- [ ] Uploading valid JPG, PNG, or PDF files uploads them to the designated event folder in Google Drive.
-- [ ] Files larger than 5 MB or invalid file extensions are rejected with clear error messages.
-- [ ] Uploaded files in Google Drive have restricted permissions (cannot be accessed without admin credentials).
-- [ ] No direct Google Drive links are exposed in public API responses or form pages.
-- [ ] Authorized admins can view and download submitted ID cards directly from the registration details screen via the proxy route.
-- [ ] Failed Drive uploads do not lose registration form data; status is flagged as `'FAILED'` with a retry trigger.
+- [x] Uploading valid JPG, PNG, or PDF files uploads them to the designated event folder in Google Drive.
+- [x] Files larger than 5 MB or invalid file extensions are rejected with clear error messages.
+- [x] Uploaded files in Google Drive have restricted permissions (cannot be accessed without admin credentials).
+- [x] No direct Google Drive links are exposed in public API responses or form pages.
+- [x] Authorized admins can view and download submitted ID cards directly from the registration details screen via the proxy route.
+- [x] Failed Drive uploads do not lose registration form data; status is flagged as `'FAILED'` with a retry trigger.
 

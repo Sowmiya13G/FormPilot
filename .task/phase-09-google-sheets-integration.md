@@ -111,10 +111,10 @@ src/
 ---
 
 ## 4. Acceptance Criteria
-- [ ] Submitting a registration writes a row into the configured Google Sheet matching headers by name.
-- [ ] If new fields are mapped that do not exist in row 1, they are appended to the right without disrupting existing columns.
-- [ ] Text values starting with `=`, `+`, `-`, or `@` are safely escaped with `'` and do not execute as formulas.
-- [ ] Mobile numbers are stored with leading zero intact and do not become scientific notation.
-- [ ] If Google Sheets API is temporarily offline, registration is saved in MongoDB, flagged as `'FAILED'`, and can be retried via the admin dashboard button.
-- [ ] Retrying a sync does not create duplicate rows.
+- [x] Submitting a registration writes a row into the configured Google Sheet matching headers by name.
+- [x] If new fields are mapped that do not exist in row 1, they are appended to the right without disrupting existing columns.
+- [x] Text values starting with `=`, `+`, `-`, or `@` are safely escaped with `'` and do not execute as formulas.
+- [x] Mobile numbers are stored with leading zero intact and do not become scientific notation.
+- [x] If Google Sheets API is temporarily offline, registration is saved in MongoDB, flagged as `'FAILED'`, and can be retried via the admin dashboard button.
+- [x] Retrying a sync does not create duplicate rows.
 
