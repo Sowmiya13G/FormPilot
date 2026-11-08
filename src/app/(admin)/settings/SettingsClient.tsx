@@ -207,8 +207,8 @@ export function SettingsClient({
           type="button"
           onClick={() => setActiveTab('integrations')}
           className={`px-4 py-2.5 text-sm font-semibold rounded-t-lg border-b-2 transition-colors flex items-center gap-2 ${activeTab === 'integrations'
-              ? 'border-blue-600 text-blue-600 bg-blue-50/50 dark:bg-blue-950/20'
-              : 'border-transparent text-slate-500 hover:text-slate-700'
+            ? 'border-blue-600 text-blue-600 bg-blue-50/50 dark:bg-blue-950/20'
+            : 'border-transparent text-slate-500 hover:text-slate-700'
             }`}
         >
           <Key className="w-4 h-4" />
@@ -219,8 +219,8 @@ export function SettingsClient({
           type="button"
           onClick={() => setActiveTab('defaults')}
           className={`px-4 py-2.5 text-sm font-semibold rounded-t-lg border-b-2 transition-colors flex items-center gap-2 ${activeTab === 'defaults'
-              ? 'border-blue-600 text-blue-600 bg-blue-50/50 dark:bg-blue-950/20'
-              : 'border-transparent text-slate-500 hover:text-slate-700'
+            ? 'border-blue-600 text-blue-600 bg-blue-50/50 dark:bg-blue-950/20'
+            : 'border-transparent text-slate-500 hover:text-slate-700'
             }`}
         >
           <Globe className="w-4 h-4" />
@@ -231,8 +231,8 @@ export function SettingsClient({
           type="button"
           onClick={() => setActiveTab('audit')}
           className={`px-4 py-2.5 text-sm font-semibold rounded-t-lg border-b-2 transition-colors flex items-center gap-2 ${activeTab === 'audit'
-              ? 'border-blue-600 text-blue-600 bg-blue-50/50 dark:bg-blue-950/20'
-              : 'border-transparent text-slate-500 hover:text-slate-700'
+            ? 'border-blue-600 text-blue-600 bg-blue-50/50 dark:bg-blue-950/20'
+            : 'border-transparent text-slate-500 hover:text-slate-700'
             }`}
         >
           <Activity className="w-4 h-4" />
@@ -299,11 +299,6 @@ export function SettingsClient({
                     <HardDrive className="w-4 h-4 text-blue-600" />
                     <h4 className="text-sm font-bold text-slate-900 dark:text-white">Google Drive</h4>
                   </div>
-                  {testResults.drive && (
-                    <Badge variant={testResults.drive.success ? 'success' : 'danger'}>
-                      {testResults.drive.success ? 'Online' : 'Error'}
-                    </Badge>
-                  )}
                 </div>
 
                 <div className="space-y-1">
@@ -322,11 +317,6 @@ export function SettingsClient({
                   </span>
                 </div>
 
-                {testResults.drive && (
-                  <p className="text-[11px] p-2 rounded bg-slate-50 dark:bg-slate-800 text-slate-600 dark:text-slate-300 border border-slate-100 dark:border-slate-700">
-                    {testResults.drive.message}
-                  </p>
-                )}
               </div>
 
               <Button
@@ -348,11 +338,6 @@ export function SettingsClient({
                     <Table className="w-4 h-4 text-emerald-600" />
                     <h4 className="text-sm font-bold text-slate-900 dark:text-white">Google Sheets</h4>
                   </div>
-                  {testResults.sheets && (
-                    <Badge variant={testResults.sheets.success ? 'success' : 'danger'}>
-                      {testResults.sheets.success ? 'Online' : 'Error'}
-                    </Badge>
-                  )}
                 </div>
 
                 <div className="space-y-1">
@@ -370,12 +355,6 @@ export function SettingsClient({
                     Fallback sheet when templates do not specify one.
                   </span>
                 </div>
-
-                {testResults.sheets && (
-                  <p className="text-[11px] p-2 rounded bg-slate-50 dark:bg-slate-800 text-slate-600 dark:text-slate-300 border border-slate-100 dark:border-slate-700">
-                    {testResults.sheets.message}
-                  </p>
-                )}
               </div>
 
               <Button
@@ -397,11 +376,6 @@ export function SettingsClient({
                     <Mail className="w-4 h-4 text-rose-600" />
                     <h4 className="text-sm font-bold text-slate-900 dark:text-white">Gmail API</h4>
                   </div>
-                  {testResults.gmail && (
-                    <Badge variant={testResults.gmail.success ? 'success' : 'danger'}>
-                      {testResults.gmail.success ? 'Online' : 'Error'}
-                    </Badge>
-                  )}
                 </div>
 
                 <div className="space-y-1">
@@ -419,12 +393,6 @@ export function SettingsClient({
                     Campaigns will be sent via this authorized mailbox.
                   </span>
                 </div>
-
-                {testResults.gmail && (
-                  <p className="text-[11px] p-2 rounded bg-slate-50 dark:bg-slate-800 text-slate-600 dark:text-slate-300 border border-slate-100 dark:border-slate-700">
-                    {testResults.gmail.message}
-                  </p>
-                )}
               </div>
 
               <Button
