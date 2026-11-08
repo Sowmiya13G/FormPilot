@@ -89,3 +89,69 @@ export interface IComponent {
   createdAt: Date;
   updatedAt: Date;
 }
+
+export type TemplateStatus = 'DRAFT' | 'PUBLISHED' | 'ARCHIVED';
+
+export type ConditionOperator =
+  | 'equals'
+  | 'notEquals'
+  | 'isEmpty'
+  | 'isNotEmpty'
+  | 'greaterThan'
+  | 'lessThan'
+  | 'contains';
+
+export interface IConditionRule {
+  fieldKey: string;
+  operator: ConditionOperator;
+  value?: unknown;
+}
+
+export interface IConditionalConfig {
+  action: 'show' | 'hide';
+  matchType: 'all' | 'any';
+  rules: IConditionRule[];
+}
+
+export interface ITemplateField {
+  componentKey: string;
+  fieldKey: string;
+  label?: string;
+  placeholder?: string;
+  helpText?: string;
+  required?: boolean;
+  order: number;
+  width?: 'full' | 'half' | 'third';
+  conditionalConfig?: IConditionalConfig;
+  validationOverride?: Record<string, unknown>;
+}
+
+export interface IThemeConfig {
+  primaryColor?: string;
+  backgroundColor?: string;
+  backgroundImageUrl?: string;
+  bannerImageUrl?: string;
+  logoUrl?: string;
+  fontFamily?: string;
+}
+
+export interface IRegistrationTemplate {
+  _id: string;
+  eventName: string;
+  slug: string;
+  description?: string;
+  status: TemplateStatus;
+  version: number;
+  fields: ITemplateField[];
+  theme: IThemeConfig;
+  allowedOrigins?: string[];
+  driveFolderId?: string;
+  spreadsheetId?: string;
+  sheetTabId?: string;
+  sheetMapping?: Record<string, string>;
+  createdBy?: string;
+  updatedBy?: string;
+  publishedAt?: Date;
+  createdAt: Date;
+  updatedAt: Date;
+}

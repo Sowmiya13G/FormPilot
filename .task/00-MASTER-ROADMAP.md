@@ -30,7 +30,7 @@ Eliminate manual HTML/CSS/JS form creation for client events by providing a web-
 | **01** | Foundation, Database & Admin Layout | ✅ Completed | Next.js setup, Mongoose connection, Google OAuth, Admin Shell | [Phase 1](./phase-01-foundation-auth-layout.md) |
 | **02** | User Management & Role-Based Access Control | ✅ Completed | User model, initial admin seed, allowlist, Admin/Editor/Viewer RBAC | [Phase 2](./phase-02-user-management-rbac.md) |
 | **03** | Component Library CRUD | ✅ Completed | 15 field types, component manager UI, validation settings | [Phase 3](./phase-03-component-library.md) |
-| **04** | Template Builder & Conditional Field Engine | ⏳ Pending | Form builder UI, drag & drop, conditional logic rules engine | [Phase 4](./phase-04-template-builder-conditional-engine.md) |
+| **04** | Template Builder & Conditional Field Engine | ✅ Completed | Form builder UI, drag & drop, conditional logic rules engine | [Phase 4](./phase-04-template-builder-conditional-engine.md) |
 | **05** | Wonderla BANDHAN 13.2 Master Template | ⏳ Pending | Wonderla reference template, repeatable kids (max 3), ticket logic | [Phase 5](./phase-05-wonderla-reference-template.md) |
 | **06** | Standalone HTML Exporter & Form Preview | ⏳ Pending | Standalone HTML generator, pure CSS/JS runtime, file download | [Phase 6](./phase-06-standalone-html-exporter.md) |
 | **07** | Public Registration API & Idempotency | ⏳ Pending | `/api/public/registrations`, Zod schema, idempotency, MongoDB storage | [Phase 7](./phase-07-public-registration-api.md) |
