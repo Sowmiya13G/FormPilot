@@ -63,3 +63,4 @@ export type ComponentInput = z.infer<typeof componentSchema>;
 
 export const updateComponentSchema = componentSchema.partial().omit({ key: true });
 export type UpdateComponentInput = z.infer<typeof updateComponentSchema>;
+

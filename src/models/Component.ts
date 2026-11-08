@@ -162,3 +162,4 @@ export const Component: Model<IComponentDocument> =
   mongoose.models.Component || mongoose.model<IComponentDocument>('Component', ComponentSchema);
 
 export default Component;
+

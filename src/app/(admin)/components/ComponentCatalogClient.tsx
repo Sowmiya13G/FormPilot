@@ -210,3 +210,4 @@ export function ComponentCatalogClient({ initialComponents }: ComponentCatalogCl
 }
 
 export default ComponentCatalogClient;
+

@@ -185,3 +185,4 @@ export function ValidationConfigForm({ type, config, onChange }: ValidationConfi
 }
 
 export default ValidationConfigForm;
+
