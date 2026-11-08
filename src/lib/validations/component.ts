@@ -53,13 +53,13 @@ export const componentSchema = z.object({
   placeholder: z.string().trim().optional(),
   helpText: z.string().trim().optional(),
   defaultValue: z.unknown().optional(),
-  defaultRequired: z.boolean().default(false),
+  defaultRequired: z.boolean().optional().default(false),
   options: z.array(selectOptionSchema).optional(),
   validationConfig: validationConfigSchema.optional(),
-  active: z.boolean().default(true),
+  active: z.boolean().optional().default(true),
 });
 
-export type ComponentInput = z.infer<typeof componentSchema>;
+export type ComponentInput = z.input<typeof componentSchema>;
 
 export const updateComponentSchema = componentSchema.partial().omit({ key: true });
 export type UpdateComponentInput = z.infer<typeof updateComponentSchema>;

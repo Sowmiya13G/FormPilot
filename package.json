@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "seed:admins": "tsx scripts/seed-admins.ts"
+    "seed:admins": "tsx scripts/seed-admins.ts",
+    "seed:wonderla": "tsx scripts/seed-wonderla-template.ts"
   },
   "dependencies": {
     "clsx": "^2.1.1",
