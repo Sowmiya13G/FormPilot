@@ -60,3 +60,4 @@ export function calculateTicketSummary(data: Record<string, unknown>): ITicketSu
 }
 
 export default calculateTicketSummary;
+

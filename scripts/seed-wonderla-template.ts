@@ -64,3 +64,4 @@ seedWonderla().catch((err) => {
   console.error('\nSeeding failed with error:', err);
   process.exit(1);
 });
+
