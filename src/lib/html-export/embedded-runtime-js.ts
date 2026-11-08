@@ -37,6 +37,34 @@ export function compileEmbeddedRuntimeJs(
     var errorBanner = document.getElementById('errorBanner');
     var successScreen = document.getElementById('successScreen');
     var formWrapper = document.getElementById('formWrapper');
+    var toastContainer = document.getElementById('toastContainer');
+
+    function showToast(text, type, duration) {
+      if (!toastContainer) return;
+      type = type || 'info';
+      duration = duration || 5000;
+      var toast = document.createElement('div');
+      toast.className = 'toast ' + type;
+      toast.setAttribute('role', type === 'error' ? 'alert' : 'status');
+
+      var icon = document.createElement('span');
+      icon.className = 'toast-icon';
+      icon.textContent = type === 'success' ? '✓' : type === 'error' ? '!' : 'i';
+
+      var content = document.createElement('span');
+      content.textContent = String(text || '');
+
+      toast.appendChild(icon);
+      toast.appendChild(content);
+      toastContainer.appendChild(toast);
+
+      requestAnimationFrame(function() { toast.classList.add('show'); });
+
+      window.setTimeout(function() {
+        toast.classList.remove('show');
+        window.setTimeout(function() { toast.remove(); }, 300);
+      }, duration);
+    }
 
     // 2. Conditional Visibility Rules
     var conditionalRules = ${JSON.stringify(fieldsWithConditions)};
@@ -355,8 +383,7 @@ export function compileEmbeddedRuntimeJs(
       });
 
       if (hasErrors) {
-        errorBanner.innerText = 'Please correct the highlighted fields before submitting.';
-        errorBanner.style.display = 'block';
+        showToast('Please correct the highlighted fields before submitting.', 'error');
         if (firstErrorEl) {
           firstErrorEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
           firstErrorEl.focus();
@@ -385,19 +412,22 @@ export function compileEmbeddedRuntimeJs(
           throw new Error(result.data.error || 'Submission failed. Please try again.');
         }
 
+        var regId = result.data.registrationId || '';
+        showToast('Registration submitted successfully! ID: ' + regId, 'success', 6000);
+
         // Success: hide form, show celebration screen
         form.style.display = 'none';
         var regIdEl = document.getElementById('confirmedRegId');
         if (regIdEl) {
-          regIdEl.innerText = result.data.registrationId || '';
+          regIdEl.innerText = regId;
         }
         successScreen.style.display = 'block';
         window.scrollTo({ top: 0, behavior: 'smooth' });
       })
       .catch(function(err) {
         console.error('Registration Error:', err);
-        errorBanner.innerText = err.message || 'Network error occurred. Please check your connection and try again.';
-        errorBanner.style.display = 'block';
+        var errMsg = err.message || 'Network error occurred. Please check your connection and try again.';
+        showToast(errMsg, 'error', 8000);
         submitBtn.disabled = false;
         spinner.style.display = 'none';
         btnText.innerText = 'Submit Registration';

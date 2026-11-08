@@ -8,6 +8,7 @@ import Button from '@/components/ui/Button';
 import Card from '@/components/ui/Card';
 import ComponentCard from '@/components/form-builder/ComponentCard';
 import { IComponent, ComponentCategory } from '@/types';
+import { useToast } from '@/context/ToastContext';
 
 interface ComponentCatalogClientProps {
   initialComponents: IComponent[];
@@ -24,12 +25,14 @@ const categories: ('All' | ComponentCategory)[] = [
 
 export function ComponentCatalogClient({ initialComponents }: ComponentCatalogClientProps) {
   const router = useRouter();
+  const { toast } = useToast();
   const [components, setComponents] = useState<IComponent[]>(initialComponents);
   const [search, setSearch] = useState('');
   const [selectedCategory, setSelectedCategory] = useState<'All' | ComponentCategory>('All');
   const [notification, setNotification] = useState<{ type: 'success' | 'error'; message: string } | null>(null);
 
   const showNotification = (type: 'success' | 'error', message: string) => {
+    toast[type](message);
     setNotification({ type, message });
     setTimeout(() => setNotification(null), 3500);
   };
@@ -119,24 +122,6 @@ export function ComponentCatalogClient({ initialComponents }: ComponentCatalogCl
         </Link>
       </div>
 
-      {/* Notifications */}
-      {notification && (
-        <div
-          className={`rounded-lg p-3.5 flex items-center gap-3 border ${
-            notification.type === 'success'
-              ? 'bg-emerald-50 text-emerald-800 border-emerald-200 dark:bg-emerald-950/40 dark:text-emerald-300 dark:border-emerald-900'
-              : 'bg-rose-50 text-rose-800 border-rose-200 dark:bg-rose-950/40 dark:text-rose-300 dark:border-rose-900'
-          }`}
-        >
-          {notification.type === 'success' ? (
-            <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
-          ) : (
-            <AlertCircle className="w-4 h-4 text-rose-600 shrink-0" />
-          )}
-          <span className="text-sm font-medium">{notification.message}</span>
-        </div>
-      )}
-
       {/* Search & Category Filter Pills */}
       <Card className="p-4 space-y-4">
         <div className="flex flex-col md:flex-row md:items-center gap-4">
@@ -157,11 +142,10 @@ export function ComponentCatalogClient({ initialComponents }: ComponentCatalogCl
               <button
                 key={cat}
                 onClick={() => setSelectedCategory(cat)}
-                className={`text-xs px-3 py-1.5 rounded-full font-medium transition-colors shrink-0 ${
-                  selectedCategory === cat
+                className={`text-xs px-3 py-1.5 rounded-full font-medium transition-colors shrink-0 ${selectedCategory === cat
                     ? 'bg-blue-600 text-white shadow-xs'
                     : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700'
-                }`}
+                  }`}
               >
                 {cat}
               </button>

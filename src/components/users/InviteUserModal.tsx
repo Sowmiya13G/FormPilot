@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { X, UserPlus, AlertCircle } from 'lucide-react';
 import Button from '@/components/ui/Button';
 import { Role } from '@/types';
+import { useToast } from '@/context/ToastContext';
 
 interface InviteUserModalProps {
   isOpen: boolean;
@@ -12,6 +13,7 @@ interface InviteUserModalProps {
 }
 
 export function InviteUserModal({ isOpen, onClose, onSuccess }: InviteUserModalProps) {
+  const { toast } = useToast();
   const [email, setEmail] = useState('');
   const [name, setName] = useState('');
   const [role, setRole] = useState<Role>('VIEWER');
@@ -38,13 +40,16 @@ export function InviteUserModal({ isOpen, onClose, onSuccess }: InviteUserModalP
         throw new Error(data.error || 'Failed to add user');
       }
 
+      toast.success(`User ${email} invited as ${role}`);
       setEmail('');
       setName('');
       setRole('VIEWER');
       onSuccess();
       onClose();
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'An error occurred');
+      const errMsg = err instanceof Error ? err.message : 'An error occurred';
+      setError(errMsg);
+      toast.error(errMsg);
     } finally {
       setIsLoading(false);
     }

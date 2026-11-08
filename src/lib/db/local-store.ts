@@ -319,7 +319,7 @@ export class LocalStore<T extends Record<string, any> = Record<string, any>> {
           createdAt: now,
           updatedAt: now,
           ...item,
-        } as T;
+        } as unknown as T;
         items.push(doc);
         createdList.push(this.wrapDoc(doc));
       }
@@ -332,7 +332,7 @@ export class LocalStore<T extends Record<string, any> = Record<string, any>> {
       createdAt: now,
       updatedAt: now,
       ...data,
-    } as T;
+    } as unknown as T;
 
     items.push(doc);
     this.persist();
@@ -363,7 +363,7 @@ export class LocalStore<T extends Record<string, any> = Record<string, any>> {
       ...existing,
       ...updates,
       updatedAt: new Date(),
-    } as T;
+    } as unknown as T;
 
     items[index] = updated;
     this.persist();
@@ -385,7 +385,7 @@ export class LocalStore<T extends Record<string, any> = Record<string, any>> {
         const updates = update.$set ? { ...update.$set } : { ...update };
         delete updates.$set;
         Object.assign(payload, updates);
-        return this.create(payload);
+        return this.create(payload as Partial<T>);
       }
       return null;
     }

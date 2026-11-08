@@ -8,6 +8,7 @@ import Card from '@/components/ui/Card';
 import ValidationConfigForm from '@/components/form-builder/ValidationConfigForm';
 import FieldPreview from '@/components/form-builder/FieldPreview';
 import { IComponent, ComponentFieldType, ComponentCategory, ISelectOption } from '@/types';
+import { useToast } from '@/context/ToastContext';
 
 interface ComponentEditorProps {
   initialData?: IComponent;
@@ -16,6 +17,7 @@ interface ComponentEditorProps {
 
 export function ComponentEditor({ initialData, isEditing = false }: ComponentEditorProps) {
   const router = useRouter();
+  const { toast } = useToast();
 
   const [label, setLabel] = useState(initialData?.label || '');
   const [key, setKey] = useState(initialData?.key || '');
@@ -110,10 +112,13 @@ export function ComponentEditor({ initialData, isEditing = false }: ComponentEdi
         throw new Error(data.error || 'Failed to save component');
       }
 
+      toast.success(isEditing ? 'Component updated successfully!' : 'Component created successfully!');
       router.push('/components');
       router.refresh();
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'An error occurred');
+      const errMsg = err instanceof Error ? err.message : 'An error occurred';
+      setError(errMsg);
+      toast.error(errMsg);
     } finally {
       setIsLoading(false);
     }

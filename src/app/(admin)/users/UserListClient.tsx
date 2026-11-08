@@ -19,6 +19,7 @@ import Card from '@/components/ui/Card';
 import InviteUserModal from '@/components/users/InviteUserModal';
 import EditUserRoleModal from '@/components/users/EditUserRoleModal';
 import { IUser } from '@/types';
+import { useToast } from '@/context/ToastContext';
 
 interface UserListClientProps {
   initialUsers: IUser[];
@@ -26,6 +27,7 @@ interface UserListClientProps {
 
 export function UserListClient({ initialUsers }: UserListClientProps) {
   const { data: session } = useSession();
+  const { toast } = useToast();
   const currentUserId = session?.user?.id || 'dev-admin-user';
   const currentUserEmail = session?.user?.email || 'admin@wonderla.com';
 
@@ -37,6 +39,7 @@ export function UserListClient({ initialUsers }: UserListClientProps) {
   const [notification, setNotification] = useState<{ type: 'success' | 'error'; message: string } | null>(null);
 
   const showNotification = (type: 'success' | 'error', message: string) => {
+    toast[type](message);
     setNotification({ type, message });
     setTimeout(() => setNotification(null), 4000);
   };
@@ -132,24 +135,6 @@ export function UserListClient({ initialUsers }: UserListClientProps) {
         </Button>
       </div>
 
-      {/* Notifications */}
-      {notification && (
-        <div
-          className={`rounded-lg p-3.5 flex items-center gap-3 border ${
-            notification.type === 'success'
-              ? 'bg-emerald-50 text-emerald-800 border-emerald-200 dark:bg-emerald-950/40 dark:text-emerald-300 dark:border-emerald-900'
-              : 'bg-rose-50 text-rose-800 border-rose-200 dark:bg-rose-950/40 dark:text-rose-300 dark:border-rose-900'
-          }`}
-        >
-          {notification.type === 'success' ? (
-            <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
-          ) : (
-            <AlertCircle className="w-4 h-4 text-rose-600 shrink-0" />
-          )}
-          <span className="text-sm font-medium">{notification.message}</span>
-        </div>
-      )}
-
       {/* Search & Filter Bar */}
       <Card className="p-4">
         <div className="relative">
@@ -229,16 +214,14 @@ export function UserListClient({ initialUsers }: UserListClientProps) {
 
                       <td className="px-6 py-4">
                         <span
-                          className={`inline-flex items-center gap-1.5 text-xs font-medium px-2 py-0.5 rounded-full ${
-                            user.active
+                          className={`inline-flex items-center gap-1.5 text-xs font-medium px-2 py-0.5 rounded-full ${user.active
                               ? 'bg-emerald-50 text-emerald-700 dark:bg-emerald-950/40 dark:text-emerald-300'
                               : 'bg-rose-50 text-rose-700 dark:bg-rose-950/40 dark:text-rose-300'
-                          }`}
+                            }`}
                         >
                           <span
-                            className={`w-1.5 h-1.5 rounded-full ${
-                              user.active ? 'bg-emerald-500' : 'bg-rose-500'
-                            }`}
+                            className={`w-1.5 h-1.5 rounded-full ${user.active ? 'bg-emerald-500' : 'bg-rose-500'
+                              }`}
                           />
                           {user.active ? 'Active' : 'Deactivated'}
                         </span>
@@ -247,12 +230,12 @@ export function UserListClient({ initialUsers }: UserListClientProps) {
                       <td className="px-6 py-4 text-xs text-slate-500">
                         {user.lastLoginAt
                           ? new Date(user.lastLoginAt).toLocaleDateString(undefined, {
-                              year: 'numeric',
-                              month: 'short',
-                              day: 'numeric',
-                              hour: '2-digit',
-                              minute: '2-digit',
-                            })
+                            year: 'numeric',
+                            month: 'short',
+                            day: 'numeric',
+                            hour: '2-digit',
+                            minute: '2-digit',
+                          })
                           : 'Never logged in'}
                       </td>
 

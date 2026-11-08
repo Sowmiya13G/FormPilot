@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import './globals.css';
 import SessionProvider from '@/components/layout/SessionProvider';
+import { ToastProvider } from '@/context/ToastContext';
 
 export const metadata: Metadata = {
   title: 'FormPilot — The Registration Hub',
@@ -16,7 +17,9 @@ export default function RootLayout({
     <html lang="en" className="h-full antialiased">
       <body className="min-h-full flex flex-col font-sans">
         <SessionProvider>
-          {children}
+          <ToastProvider>
+            {children}
+          </ToastProvider>
         </SessionProvider>
       </body>
     </html>

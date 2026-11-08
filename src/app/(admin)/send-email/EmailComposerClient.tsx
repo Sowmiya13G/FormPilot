@@ -16,6 +16,7 @@ import Button from '@/components/ui/Button';
 import Badge from '@/components/ui/Badge';
 import { IRegistrationTemplate } from '@/types';
 import { IEmailCampaignDocument } from '@/models/EmailCampaign';
+import { useToast } from '@/context/ToastContext';
 
 interface EmailComposerClientProps {
   templates: IRegistrationTemplate[];
@@ -28,6 +29,7 @@ export function EmailComposerClient({
   initialCampaigns,
   siteUrl,
 }: EmailComposerClientProps) {
+  const { toast } = useToast();
   const [selectedTemplateId, setSelectedTemplateId] = useState(templates[0]?._id || '');
   const [subject, setSubject] = useState(
     templates[0] ? `Invitation: ${templates[0].eventName}` : 'Invitation to Register'
@@ -37,7 +39,7 @@ export function EmailComposerClient({
   );
   const [bannerImageUrl, setBannerImageUrl] = useState(
     templates[0]?.theme?.bannerImageUrl ||
-      'https://images.unsplash.com/photo-1511578314322-379afb476865?w=1200&auto=format&fit=crop&q=80'
+    'https://images.unsplash.com/photo-1511578314322-379afb476865?w=1200&auto=format&fit=crop&q=80'
   );
   const [fallbackText, setFallbackText] = useState('Register for Wonderla Event');
   const [body, setBody] = useState(
@@ -55,6 +57,7 @@ export function EmailComposerClient({
   } | null>(null);
 
   const showNotification = (type: 'success' | 'error', message: string) => {
+    toast[type](message);
     setNotification({ type, message });
     setTimeout(() => setNotification(null), 5000);
   };
@@ -181,24 +184,6 @@ export function EmailComposerClient({
           </p>
         </div>
       </div>
-
-      {/* Notifications */}
-      {notification && (
-        <div
-          className={`rounded-xl p-4 flex items-center gap-3 border ${
-            notification.type === 'success'
-              ? 'bg-emerald-50 text-emerald-800 border-emerald-200 dark:bg-emerald-950/40 dark:text-emerald-300 dark:border-emerald-900'
-              : 'bg-rose-50 text-rose-800 border-rose-200 dark:bg-rose-950/40 dark:text-rose-300 dark:border-rose-900'
-          }`}
-        >
-          {notification.type === 'success' ? (
-            <CheckCircle2 className="w-5 h-5 text-emerald-600 shrink-0" />
-          ) : (
-            <AlertCircle className="w-5 h-5 text-rose-600 shrink-0" />
-          )}
-          <span className="text-sm font-medium">{notification.message}</span>
-        </div>
-      )}
 
       {/* Two Column Layout: Editor (Left) & Live Preview (Right) */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
@@ -471,10 +456,10 @@ export function EmailComposerClient({
                           c.status === 'SENT'
                             ? 'success'
                             : c.status === 'SENDING'
-                            ? 'warning'
-                            : c.status === 'PARTIALLY_SENT'
-                            ? 'purple'
-                            : 'default'
+                              ? 'warning'
+                              : c.status === 'PARTIALLY_SENT'
+                                ? 'purple'
+                                : 'default'
                         }
                       >
                         {c.status}

@@ -352,6 +352,49 @@ export function compileEmbeddedCss(theme: IThemeConfig = {}): string {
       color: #065f46;
     }
 
+    /* Toast Notifications */
+    .toast-container {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 99999;
+      width: min(390px, calc(100vw - 30px));
+      pointer-events: none;
+    }
+
+    .toast {
+      display: flex;
+      align-items: flex-start;
+      gap: 11px;
+      padding: 15px 17px;
+      margin-bottom: 10px;
+      border-radius: 9px;
+      color: #fff;
+      box-shadow: 0 8px 28px rgba(0, 0, 0, 0.22);
+      font-size: 14px;
+      line-height: 1.5;
+      opacity: 0;
+      transform: translateX(25px);
+      transition: opacity 0.25s ease, transform 0.25s ease;
+      pointer-events: auto;
+      overflow-wrap: anywhere;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .toast.success { background: #16803c; }
+    .toast.error { background: #c62828; }
+    .toast.info { background: #32145e; }
+
+    .toast-icon {
+      font-size: 18px;
+      font-weight: 700;
+      line-height: 1.2;
+    }
+
     .success-screen {
       display: none;
       text-align: center;

@@ -6,6 +6,7 @@ import FieldRenderer from '@/components/dynamic-form/FieldRenderer';
 import { isFieldVisible } from '@/components/dynamic-form/evaluateCondition';
 import Card from '@/components/ui/Card';
 import { CheckCircle2, AlertCircle } from 'lucide-react';
+import { useToast } from '@/context/ToastContext';
 
 interface DynamicFormRendererProps {
   fields: ITemplateField[];
@@ -40,6 +41,7 @@ export function DynamicFormRenderer({
       : `idemp-${Date.now()}-${Math.random().toString(36).substring(2, 9)}`
   );
 
+  const { toast } = useToast();
   const primaryColor = theme.primaryColor || '#54258b';
 
   // Handle value change with conditional field clearing & mirroring
@@ -137,11 +139,14 @@ export function DynamicFormRenderer({
 
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
+      const firstErrKey = Object.keys(newErrors)[0];
+      toast.error(newErrors[firstErrKey] || 'Please complete all required fields.');
       return;
     }
 
     if (onSubmitSimulation) {
       onSubmitSimulation(formValues);
+      toast.success('Registration simulated successfully!');
       setSubmitted(true);
       return;
     }
@@ -171,10 +176,14 @@ export function DynamicFormRenderer({
         throw new Error(json.error || 'Failed to submit registration');
       }
 
-      setConfirmedRegistrationId(json.data?.registrationId || 'CONFIRMED');
+      const regId = json.data?.registrationId || 'CONFIRMED';
+      setConfirmedRegistrationId(regId);
+      toast.success(`Registration confirmed! Confirmation ID: ${regId}`);
       setSubmitted(true);
     } catch (err) {
-      setApiError((err as Error).message);
+      const errMsg = (err as Error).message || 'Failed to submit registration';
+      setApiError(errMsg);
+      toast.error(errMsg);
     } finally {
       setIsSubmitting(false);
     }
@@ -474,13 +483,13 @@ export function DynamicFormRenderer({
                 <div className="flex justify-between items-center px-4 py-2.5 bg-slate-50 dark:bg-slate-800/60 border-b border-[#eee6f6] dark:border-slate-700">
                   <span className="text-slate-700 dark:text-slate-300">Employee Ticket Required</span>
                   <strong className="text-[#32145e] dark:text-purple-300">
-                    {employeeTicketVal || '—'}
+                    {String(employeeTicketVal || '—')}
                   </strong>
                 </div>
                 <div className="flex justify-between items-center px-4 py-2.5 bg-white dark:bg-slate-900 border-b border-[#eee6f6] dark:border-slate-700">
                   <span className="text-slate-700 dark:text-slate-300">Spouse Ticket Required</span>
                   <strong className="text-[#32145e] dark:text-purple-300">
-                    {hasSpouse ? spouseTicketVal || '—' : 'No (not attending)'}
+                    {hasSpouse ? String(spouseTicketVal || '—') : 'No (not attending)'}
                   </strong>
                 </div>
                 <div className="flex justify-between items-center px-4 py-2.5 bg-slate-50 dark:bg-slate-800/60 border-b border-[#eee6f6] dark:border-slate-700">

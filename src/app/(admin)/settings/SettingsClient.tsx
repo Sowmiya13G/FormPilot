@@ -19,6 +19,7 @@ import Card from '@/components/ui/Card';
 import Button from '@/components/ui/Button';
 import Badge from '@/components/ui/Badge';
 import { IAuditLogDocument } from '@/models/AuditLog';
+import { useToast } from '@/context/ToastContext';
 
 interface SettingsClientProps {
   initialSettings: Record<string, unknown>;
@@ -50,6 +51,7 @@ export function SettingsClient({
   initialIntegration,
   initialAuditLogs,
 }: SettingsClientProps) {
+  const { toast } = useToast();
   const [activeTab, setActiveTab] = useState<'integrations' | 'defaults' | 'audit'>('integrations');
 
   // Integrations state
@@ -77,7 +79,7 @@ export function SettingsClient({
   const [emailSignature, setEmailSignature] = useState(
     String(
       initialSettings['EMAIL_SIGNATURE'] ||
-        '<p>Warm regards,<br /><strong>Wonderla Event Organizing Team</strong><br />Wonderla Holidays Ltd.</p>'
+      '<p>Warm regards,<br /><strong>Wonderla Event Organizing Team</strong><br />Wonderla Holidays Ltd.</p>'
     )
   );
 
@@ -91,6 +93,7 @@ export function SettingsClient({
   } | null>(null);
 
   const showNotification = (type: 'success' | 'error', message: string) => {
+    toast[type](message);
     setNotification({ type, message });
     setTimeout(() => setNotification(null), 5000);
   };
@@ -198,34 +201,15 @@ export function SettingsClient({
         </Button>
       </div>
 
-      {/* Notifications */}
-      {notification && (
-        <div
-          className={`rounded-xl p-4 flex items-center gap-3 border ${
-            notification.type === 'success'
-              ? 'bg-emerald-50 text-emerald-800 border-emerald-200 dark:bg-emerald-950/40 dark:text-emerald-300 dark:border-emerald-900'
-              : 'bg-rose-50 text-rose-800 border-rose-200 dark:bg-rose-950/40 dark:text-rose-300 dark:border-rose-900'
-          }`}
-        >
-          {notification.type === 'success' ? (
-            <CheckCircle2 className="w-5 h-5 text-emerald-600 shrink-0" />
-          ) : (
-            <AlertCircle className="w-5 h-5 text-rose-600 shrink-0" />
-          )}
-          <span className="text-sm font-medium">{notification.message}</span>
-        </div>
-      )}
-
       {/* Tabs Bar */}
       <div className="flex items-center gap-2 border-b border-slate-200 dark:border-slate-800 pb-px">
         <button
           type="button"
           onClick={() => setActiveTab('integrations')}
-          className={`px-4 py-2.5 text-sm font-semibold rounded-t-lg border-b-2 transition-colors flex items-center gap-2 ${
-            activeTab === 'integrations'
+          className={`px-4 py-2.5 text-sm font-semibold rounded-t-lg border-b-2 transition-colors flex items-center gap-2 ${activeTab === 'integrations'
               ? 'border-blue-600 text-blue-600 bg-blue-50/50 dark:bg-blue-950/20'
               : 'border-transparent text-slate-500 hover:text-slate-700'
-          }`}
+            }`}
         >
           <Key className="w-4 h-4" />
           Google Workspace Integrations
@@ -234,11 +218,10 @@ export function SettingsClient({
         <button
           type="button"
           onClick={() => setActiveTab('defaults')}
-          className={`px-4 py-2.5 text-sm font-semibold rounded-t-lg border-b-2 transition-colors flex items-center gap-2 ${
-            activeTab === 'defaults'
+          className={`px-4 py-2.5 text-sm font-semibold rounded-t-lg border-b-2 transition-colors flex items-center gap-2 ${activeTab === 'defaults'
               ? 'border-blue-600 text-blue-600 bg-blue-50/50 dark:bg-blue-950/20'
               : 'border-transparent text-slate-500 hover:text-slate-700'
-          }`}
+            }`}
         >
           <Globe className="w-4 h-4" />
           Platform Defaults & Branding
@@ -247,11 +230,10 @@ export function SettingsClient({
         <button
           type="button"
           onClick={() => setActiveTab('audit')}
-          className={`px-4 py-2.5 text-sm font-semibold rounded-t-lg border-b-2 transition-colors flex items-center gap-2 ${
-            activeTab === 'audit'
+          className={`px-4 py-2.5 text-sm font-semibold rounded-t-lg border-b-2 transition-colors flex items-center gap-2 ${activeTab === 'audit'
               ? 'border-blue-600 text-blue-600 bg-blue-50/50 dark:bg-blue-950/20'
               : 'border-transparent text-slate-500 hover:text-slate-700'
-          }`}
+            }`}
         >
           <Activity className="w-4 h-4" />
           Audit Logs

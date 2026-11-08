@@ -97,7 +97,7 @@ describe('Local Data Store & Mongoose Model Proxy', () => {
 
     const first = await Component.findOne({ key: 'employeeName' });
     expect(first).not.toBeNull();
-    expect(first.key).toBe('employeeName');
+    expect(first?.key).toBe('employeeName');
   });
 });
 

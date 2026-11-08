@@ -11,7 +11,7 @@ export function Card({ children, className, ...props }: CardProps) {
     <div
       className={twMerge(
         clsx(
-          'bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-xl shadow-xs p-6',
+          'bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800/80 rounded-2xl shadow-xs hover:shadow-sm transition-shadow p-6',
           className
         )
       )}

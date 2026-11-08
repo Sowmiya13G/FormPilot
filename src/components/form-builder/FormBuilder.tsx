@@ -35,6 +35,7 @@ import {
   IComponent,
   IThemeConfig,
 } from '@/types';
+import { useToast } from '@/context/ToastContext';
 
 interface FormBuilderProps {
   initialTemplate?: IRegistrationTemplate;
@@ -48,6 +49,7 @@ export function FormBuilder({
   isEditing = false,
 }: FormBuilderProps) {
   const router = useRouter();
+  const { toast } = useToast();
 
   const [activeTab, setActiveTab] = useState<'fields' | 'theme' | 'integrations' | 'preview'>('fields');
   const [eventName, setEventName] = useState(initialTemplate?.eventName || '');
@@ -82,6 +84,7 @@ export function FormBuilder({
   }, [availableComponents]);
 
   const showNotification = (type: 'success' | 'error', message: string) => {
+    toast[type](message);
     setNotification({ type, message });
     setTimeout(() => setNotification(null), 4000);
   };
@@ -295,24 +298,6 @@ export function FormBuilder({
         </div>
       </div>
 
-      {/* Notifications */}
-      {notification && (
-        <div
-          className={`rounded-lg p-3.5 flex items-center gap-3 border ${
-            notification.type === 'success'
-              ? 'bg-emerald-50 text-emerald-800 border-emerald-200 dark:bg-emerald-950/40 dark:text-emerald-300 dark:border-emerald-900'
-              : 'bg-rose-50 text-rose-800 border-rose-200 dark:bg-rose-950/40 dark:text-rose-300 dark:border-rose-900'
-          }`}
-        >
-          {notification.type === 'success' ? (
-            <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
-          ) : (
-            <AlertCircle className="w-4 h-4 text-rose-600 shrink-0" />
-          )}
-          <span className="text-sm font-medium">{notification.message}</span>
-        </div>
-      )}
-
       {/* Basic Metadata Card */}
       <Card className="p-5">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -362,11 +347,10 @@ export function FormBuilder({
       <div className="flex items-center gap-2 border-b border-slate-200 dark:border-slate-800">
         <button
           onClick={() => setActiveTab('fields')}
-          className={`flex items-center gap-2 px-4 py-2.5 text-xs font-semibold border-b-2 transition-colors cursor-pointer ${
-            activeTab === 'fields'
+          className={`flex items-center gap-2 px-4 py-2.5 text-xs font-semibold border-b-2 transition-colors cursor-pointer ${activeTab === 'fields'
               ? 'border-blue-600 text-blue-600 dark:text-blue-400'
               : 'border-transparent text-slate-500 hover:text-slate-800'
-          }`}
+            }`}
         >
           <Layers className="w-4 h-4" />
           <span>Fields & Canvas ({fields.length})</span>
@@ -374,11 +358,10 @@ export function FormBuilder({
 
         <button
           onClick={() => setActiveTab('theme')}
-          className={`flex items-center gap-2 px-4 py-2.5 text-xs font-semibold border-b-2 transition-colors cursor-pointer ${
-            activeTab === 'theme'
+          className={`flex items-center gap-2 px-4 py-2.5 text-xs font-semibold border-b-2 transition-colors cursor-pointer ${activeTab === 'theme'
               ? 'border-blue-600 text-blue-600 dark:text-blue-400'
               : 'border-transparent text-slate-500 hover:text-slate-800'
-          }`}
+            }`}
         >
           <Palette className="w-4 h-4" />
           <span>Theme & Branding</span>
@@ -386,11 +369,10 @@ export function FormBuilder({
 
         <button
           onClick={() => setActiveTab('integrations')}
-          className={`flex items-center gap-2 px-4 py-2.5 text-xs font-semibold border-b-2 transition-colors cursor-pointer ${
-            activeTab === 'integrations'
+          className={`flex items-center gap-2 px-4 py-2.5 text-xs font-semibold border-b-2 transition-colors cursor-pointer ${activeTab === 'integrations'
               ? 'border-blue-600 text-blue-600 dark:text-blue-400'
               : 'border-transparent text-slate-500 hover:text-slate-800'
-          }`}
+            }`}
         >
           <Table className="w-4 h-4" />
           <span>Google Workspace Sync</span>
@@ -398,11 +380,10 @@ export function FormBuilder({
 
         <button
           onClick={() => setActiveTab('preview')}
-          className={`flex items-center gap-2 px-4 py-2.5 text-xs font-semibold border-b-2 transition-colors cursor-pointer ${
-            activeTab === 'preview'
+          className={`flex items-center gap-2 px-4 py-2.5 text-xs font-semibold border-b-2 transition-colors cursor-pointer ${activeTab === 'preview'
               ? 'border-blue-600 text-blue-600 dark:text-blue-400'
               : 'border-transparent text-slate-500 hover:text-slate-800'
-          }`}
+            }`}
         >
           <Eye className="w-4 h-4" />
           <span>Live Form Preview</span>

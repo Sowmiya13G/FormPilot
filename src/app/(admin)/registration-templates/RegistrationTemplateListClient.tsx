@@ -21,6 +21,7 @@ import Button from '@/components/ui/Button';
 import Badge from '@/components/ui/Badge';
 import Card from '@/components/ui/Card';
 import { IRegistrationTemplate, TemplateStatus } from '@/types';
+import { useToast } from '@/context/ToastContext';
 
 interface RegistrationTemplateListClientProps {
   initialTemplates: IRegistrationTemplate[];
@@ -30,12 +31,14 @@ export function RegistrationTemplateListClient({
   initialTemplates,
 }: RegistrationTemplateListClientProps) {
   const router = useRouter();
+  const { toast } = useToast();
   const [templates, setTemplates] = useState<IRegistrationTemplate[]>(initialTemplates);
   const [search, setSearch] = useState('');
   const [statusFilter, setStatusFilter] = useState<'All' | TemplateStatus>('All');
   const [notification, setNotification] = useState<{ type: 'success' | 'error'; message: string } | null>(null);
 
   const showNotification = (type: 'success' | 'error', message: string) => {
+    toast[type](message);
     setNotification({ type, message });
     setTimeout(() => setNotification(null), 3500);
   };
@@ -117,24 +120,6 @@ export function RegistrationTemplateListClient({
         </Link>
       </div>
 
-      {/* Notifications */}
-      {notification && (
-        <div
-          className={`rounded-lg p-3.5 flex items-center gap-3 border ${
-            notification.type === 'success'
-              ? 'bg-emerald-50 text-emerald-800 border-emerald-200 dark:bg-emerald-950/40 dark:text-emerald-300 dark:border-emerald-900'
-              : 'bg-rose-50 text-rose-800 border-rose-200 dark:bg-rose-950/40 dark:text-rose-300 dark:border-rose-900'
-          }`}
-        >
-          {notification.type === 'success' ? (
-            <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
-          ) : (
-            <AlertCircle className="w-4 h-4 text-rose-600 shrink-0" />
-          )}
-          <span className="text-sm font-medium">{notification.message}</span>
-        </div>
-      )}
-
       {/* Search & Status Filters */}
       <Card className="p-4 flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div className="relative flex-1">
@@ -153,11 +138,10 @@ export function RegistrationTemplateListClient({
             <button
               key={st}
               onClick={() => setStatusFilter(st)}
-              className={`text-xs px-3 py-1.5 rounded-full font-medium transition-colors ${
-                statusFilter === st
+              className={`text-xs px-3 py-1.5 rounded-full font-medium transition-colors ${statusFilter === st
                   ? 'bg-blue-600 text-white shadow-xs'
                   : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200'
-              }`}
+                }`}
             >
               {st}
             </button>
@@ -250,11 +234,10 @@ export function RegistrationTemplateListClient({
                     <button
                       type="button"
                       onClick={() => handlePublishToggle(template)}
-                      className={`p-1.5 rounded-lg text-xs font-medium transition-colors ${
-                        isPublished
+                      className={`p-1.5 rounded-lg text-xs font-medium transition-colors ${isPublished
                           ? 'text-amber-600 hover:bg-amber-50'
                           : 'text-emerald-600 hover:bg-emerald-50'
-                      }`}
+                        }`}
                       title={isPublished ? 'Revert to draft' : 'Publish template'}
                     >
                       <Send className="w-3.5 h-3.5" />

@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { X, Shield, AlertCircle } from 'lucide-react';
 import Button from '@/components/ui/Button';
 import { IUser, Role } from '@/types';
+import { useToast } from '@/context/ToastContext';
 
 interface EditUserRoleModalProps {
   user: IUser | null;
@@ -21,6 +22,7 @@ function EditUserRoleForm({
   onClose: () => void;
   onSuccess: () => void;
 }) {
+  const { toast } = useToast();
   const [role, setRole] = useState<Role>(user.role);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -43,10 +45,13 @@ function EditUserRoleForm({
         throw new Error(data.error || 'Failed to update user role');
       }
 
+      toast.success(`Role for ${user.email} updated to ${role}`);
       onSuccess();
       onClose();
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'An error occurred');
+      const errMsg = err instanceof Error ? err.message : 'An error occurred';
+      setError(errMsg);
+      toast.error(errMsg);
     } finally {
       setIsLoading(false);
     }
