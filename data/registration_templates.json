@@ -2,46 +2,54 @@
   {
     "_id": "ccfe0c77198ca887156d03b8",
     "createdAt": "2026-11-08T12:26:13.857Z",
-    "updatedAt": "2026-11-08T12:28:04.894Z",
-    "eventName": "Wonderla BANDHAN 13.2",
+    "updatedAt": "2026-11-08T12:41:56.878Z",
+    "eventName": "BANDHAN 13.2",
     "slug": "wonderla-bandhan-13-2",
-    "description": "Official Registration & Ticket Management for Wonderla BANDHAN 13.2 Event",
+    "description": "Please fill in the details below to complete your registration.",
     "theme": {
-      "primaryColor": "#0284c7",
-      "backgroundColor": "#ffffff",
-      "bannerImageUrl": "https://images.unsplash.com/photo-1513889961551-628c1e5e2ee9?q=80&w=1200&auto=format&fit=crop",
-      "fontFamily": "Inter, sans-serif"
+      "primaryColor": "#54258b",
+      "backgroundColor": "#1f0d43",
+      "backgroundImageUrl": "https://vibrationevents.in/register/images/bandhanNovBG.png",
+      "logoUrl": "https://vibrationevents.in/register/images/hitachi.png",
+      "fontFamily": "Arial, Helvetica, sans-serif"
     },
     "allowedOrigins": [
       "http://localhost:3000",
-      "http://localhost:5500"
+      "https://vibrationevents.in"
     ],
     "sheetTabId": "Registrations",
     "sheetMapping": {
-      "employeeName": "Customer / Employee Name",
+      "name": "Name",
       "companyName": "Company Name",
       "designation": "Designation",
       "email": "Email",
       "mobileNumber": "Mobile Number",
-      "cabRequired": "Cab Required",
-      "pickupAddress": "Pickup Address",
-      "employeeHeightEligibility": "Employee Height Eligibility",
-      "employeeTicketRequired": "Employee Ticket Required",
+      "cabReq": "Cab Required?",
+      "address": "Pickup Address",
       "spouseName": "Spouse / Partner Name",
-      "spouseHeightEligibility": "Spouse Height Eligibility",
-      "spouseTicketRequired": "Spouse Ticket Required",
-      "bringingKids": "Are you bringing kids?",
-      "totalTickets": "Total Wonderla Tickets"
+      "employeeTicket": "Employee Ticket Required",
+      "spouseTicket": "Spouse Ticket Required",
+      "kids": "Are you bringing kids?",
+      "kidsCount": "Kids Count",
+      "totalTickets": "Total Wonderla Tickets Required"
     },
     "fields": [
       {
-        "componentKey": "employeeName",
-        "fieldKey": "employeeName",
-        "label": "Customer / Employee Name",
-        "placeholder": "Enter full name",
-        "required": true,
+        "componentKey": "sectionPersonal",
+        "fieldKey": "sectionPersonal",
+        "label": "Personal Details",
+        "required": false,
         "order": 0,
         "width": "full"
+      },
+      {
+        "componentKey": "name",
+        "fieldKey": "name",
+        "label": "Name",
+        "placeholder": "Enter your name",
+        "required": true,
+        "order": 1,
+        "width": "half"
       },
       {
         "componentKey": "companyName",
@@ -49,7 +57,7 @@
         "label": "Company Name",
         "placeholder": "Enter company name",
         "required": true,
-        "order": 1,
+        "order": 2,
         "width": "half"
       },
       {
@@ -58,50 +66,49 @@
         "label": "Designation",
         "placeholder": "Enter designation",
         "required": true,
-        "order": 2,
+        "order": 3,
         "width": "half"
       },
       {
         "componentKey": "email",
         "fieldKey": "email",
-        "label": "Email Address",
-        "placeholder": "name@company.com",
+        "label": "Email",
+        "placeholder": "Enter email address",
         "required": true,
-        "order": 3,
+        "order": 4,
         "width": "half"
       },
       {
         "componentKey": "mobileNumber",
         "fieldKey": "mobileNumber",
         "label": "Mobile Number",
-        "placeholder": "9876543210",
-        "helpText": "10-digit Indian mobile number",
+        "placeholder": "Enter 10-digit mobile number",
         "required": true,
-        "order": 4,
+        "order": 5,
         "width": "half"
       },
       {
-        "componentKey": "cabRequired",
-        "fieldKey": "cabRequired",
-        "label": "Cab Required",
-        "required": true,
-        "order": 5,
-        "width": "full"
-      },
-      {
-        "componentKey": "pickupAddress",
-        "fieldKey": "pickupAddress",
-        "label": "Pickup Address",
-        "placeholder": "Enter complete residential / office pickup address",
+        "componentKey": "cabReq",
+        "fieldKey": "cabReq",
+        "label": "Cab Required?",
         "required": true,
         "order": 6,
+        "width": "half"
+      },
+      {
+        "componentKey": "address",
+        "fieldKey": "address",
+        "label": "Pickup Address",
+        "placeholder": "Enter your pickup address",
+        "required": true,
+        "order": 7,
         "width": "full",
         "conditionalConfig": {
           "action": "show",
           "matchType": "all",
           "rules": [
             {
-              "fieldKey": "cabRequired",
+              "fieldKey": "cabReq",
               "operator": "equals",
               "value": "Yes"
             }
@@ -109,44 +116,36 @@
         }
       },
       {
-        "componentKey": "employeeIdCard",
-        "fieldKey": "employeeIdCard",
-        "label": "Employee ID Card",
-        "helpText": "Upload valid employee ID (JPG, PNG, or PDF up to 5MB)",
-        "required": true,
-        "order": 7,
-        "width": "full"
-      },
-      {
-        "componentKey": "employeeHeightEligibility",
-        "fieldKey": "employeeHeightEligibility",
-        "label": "Employee Height Eligibility",
-        "required": true,
+        "componentKey": "spouseName",
+        "fieldKey": "spouseName",
+        "label": "Spouse / Partner Name",
+        "placeholder": "Enter spouse / partner name",
+        "required": false,
         "order": 8,
         "width": "half"
       },
       {
-        "componentKey": "employeeTicketRequired",
-        "fieldKey": "employeeTicketRequired",
-        "label": "Employee Ticket Required",
-        "required": true,
+        "componentKey": "sectionIdCards",
+        "fieldKey": "sectionIdCards",
+        "label": "ID Card Details",
+        "required": false,
         "order": 9,
-        "width": "half"
+        "width": "full"
       },
       {
-        "componentKey": "spouseName",
-        "fieldKey": "spouseName",
-        "label": "Spouse / Partner Name",
-        "placeholder": "Enter spouse name if attending (optional)",
-        "required": false,
+        "componentKey": "employeeIdCard",
+        "fieldKey": "employeeIdCard",
+        "label": "Employee / Registrant ID Card",
+        "helpText": "Upload the ID card of the person registering. JPG, JPEG, PNG or PDF. Maximum size: 5 MB.",
+        "required": true,
         "order": 10,
         "width": "full"
       },
       {
         "componentKey": "spouseIdCard",
         "fieldKey": "spouseIdCard",
-        "label": "Spouse / Partner ID Card",
-        "helpText": "Upload valid ID proof for spouse/partner (JPG, PNG, or PDF up to 5MB)",
+        "label": "Spouse / Partner ID Card (Wife / Husband)",
+        "helpText": "Upload the ID card of your spouse / partner. Mandatory if your spouse / partner is attending. JPG, JPEG, PNG or PDF. Maximum size: 5 MB.",
         "required": true,
         "order": 11,
         "width": "full",
@@ -162,29 +161,27 @@
         }
       },
       {
-        "componentKey": "spouseHeightEligibility",
-        "fieldKey": "spouseHeightEligibility",
-        "label": "Spouse Height Eligibility",
+        "componentKey": "sectionTicketDetails",
+        "fieldKey": "sectionTicketDetails",
+        "label": "Wonderla Ticket Details",
         "required": false,
         "order": 12,
-        "width": "half",
-        "conditionalConfig": {
-          "action": "show",
-          "matchType": "all",
-          "rules": [
-            {
-              "fieldKey": "spouseName",
-              "operator": "isNotEmpty"
-            }
-          ]
-        }
+        "width": "full"
       },
       {
-        "componentKey": "spouseTicketRequired",
-        "fieldKey": "spouseTicketRequired",
-        "label": "Spouse Ticket Required",
+        "componentKey": "employeeTicket",
+        "fieldKey": "employeeTicket",
+        "label": "Wonderla Ticket Required?",
         "required": true,
         "order": 13,
+        "width": "half"
+      },
+      {
+        "componentKey": "spouseTicket",
+        "fieldKey": "spouseTicket",
+        "label": "Wonderla Ticket Required?",
+        "required": true,
+        "order": 14,
         "width": "half",
         "conditionalConfig": {
           "action": "show",
@@ -198,32 +195,67 @@
         }
       },
       {
-        "componentKey": "bringingKids",
-        "fieldKey": "bringingKids",
-        "label": "Are you bringing kids?",
-        "required": true,
-        "order": 14,
+        "componentKey": "sectionKidsDetails",
+        "fieldKey": "sectionKidsDetails",
+        "label": "Kids Details",
+        "required": false,
+        "order": 15,
         "width": "full"
       },
       {
         "componentKey": "kids",
         "fieldKey": "kids",
+        "label": "Are you bringing kids to Wonderla?",
+        "required": true,
+        "order": 16,
+        "width": "half"
+      },
+      {
+        "componentKey": "kidsCount",
+        "fieldKey": "kidsCount",
+        "label": "How many kids are accompanying you?",
+        "required": true,
+        "order": 17,
+        "width": "half",
+        "conditionalConfig": {
+          "action": "show",
+          "matchType": "all",
+          "rules": [
+            {
+              "fieldKey": "kids",
+              "operator": "equals",
+              "value": "Yes"
+            }
+          ]
+        }
+      },
+      {
+        "componentKey": "kidsDetails",
+        "fieldKey": "kidsDetails",
         "label": "Kids Details (Max 3 children)",
-        "helpText": "Provide child name, age (0–17), height eligibility, and ticket requirement.",
+        "helpText": "Each child requires Name, Age (0–17), Height Eligibility, and Wonderla Ticket choice.",
         "required": false,
-        "order": 15,
+        "order": 18,
         "width": "full",
         "conditionalConfig": {
           "action": "show",
           "matchType": "all",
           "rules": [
             {
-              "fieldKey": "bringingKids",
+              "fieldKey": "kids",
               "operator": "equals",
               "value": "Yes"
             }
           ]
         }
+      },
+      {
+        "componentKey": "sectionTicketSummary",
+        "fieldKey": "sectionTicketSummary",
+        "label": "Wonderla Ticket Summary",
+        "required": false,
+        "order": 19,
+        "width": "full"
       }
     ],
     "status": "PUBLISHED",

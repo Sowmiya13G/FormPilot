@@ -1,12 +1,21 @@
 import { IRegistrationTemplate, IComponent } from '@/types';
 import { compileEmbeddedCss } from './embedded-css';
 import { compileEmbeddedRuntimeJs } from './embedded-runtime-js';
+import { generateWonderlaHtml } from './generate-wonderla-html';
 
 export function generateStandaloneHtml(
   template: IRegistrationTemplate,
   components: IComponent[],
   publicApiBaseUrl: string
 ): string {
+  // If the template is the Wonderla Bandhan template, use the specialized pixel-perfect layout
+  if (
+    template.slug === 'wonderla-bandhan-13-2' ||
+    template.eventName.toLowerCase().includes('bandhan')
+  ) {
+    return generateWonderlaHtml(template, publicApiBaseUrl);
+  }
+
   const componentLookup: Record<string, IComponent> = {};
   components.forEach((c) => {
     componentLookup[c.key] = c;

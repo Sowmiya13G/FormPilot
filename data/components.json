@@ -2,7 +2,7 @@
   {
     "_id": "40367112e4871ade3dacf10f",
     "createdAt": "2026-11-08T12:26:13.846Z",
-    "updatedAt": "2026-11-08T12:28:04.874Z",
+    "updatedAt": "2026-11-08T12:41:56.874Z",
     "key": "employeeName",
     "label": "Customer / Employee Name",
     "type": "text",
@@ -14,60 +14,60 @@
   {
     "_id": "210ad7564103f496621114c6",
     "createdAt": "2026-11-08T12:26:13.851Z",
-    "updatedAt": "2026-11-08T12:28:04.877Z",
+    "updatedAt": "2026-11-08T12:41:56.862Z",
     "key": "companyName",
     "label": "Company Name",
     "type": "text",
     "category": "Personal Details",
-    "placeholder": "Enter company or organization name",
+    "placeholder": "Enter company name",
     "defaultRequired": true
   },
   {
     "_id": "4b5fc4c2aac74fd94ca9feea",
     "createdAt": "2026-11-08T12:26:13.851Z",
-    "updatedAt": "2026-11-08T12:28:04.879Z",
+    "updatedAt": "2026-11-08T12:41:56.863Z",
     "key": "designation",
     "label": "Designation",
     "type": "text",
     "category": "Personal Details",
-    "placeholder": "Enter job designation / title",
+    "placeholder": "Enter designation",
     "defaultRequired": true
   },
   {
     "_id": "428f695bb883ef5df0f2067b",
     "createdAt": "2026-11-08T12:26:13.852Z",
-    "updatedAt": "2026-11-08T12:28:04.880Z",
+    "updatedAt": "2026-11-08T12:41:56.864Z",
     "key": "email",
-    "label": "Email Address",
+    "label": "Email",
     "type": "email",
     "category": "Personal Details",
-    "placeholder": "name@company.com",
+    "placeholder": "Enter email address",
     "helpText": "Official email for event passes and confirmations",
     "defaultRequired": true
   },
   {
     "_id": "8f9cecab1f266cbc15ec579c",
     "createdAt": "2026-11-08T12:26:13.852Z",
-    "updatedAt": "2026-11-08T12:28:04.881Z",
+    "updatedAt": "2026-11-08T12:41:56.866Z",
     "key": "mobileNumber",
     "label": "Mobile Number",
     "type": "tel",
     "category": "Personal Details",
-    "placeholder": "9876543210",
+    "placeholder": "Enter 10-digit mobile number",
     "helpText": "10-digit Indian mobile number",
     "defaultRequired": true,
     "validationConfig": {
       "pattern": "^[6-9]\\d{9}$",
-      "patternMessage": "Please enter a valid 10-digit Indian mobile number starting with 6, 7, 8, or 9"
+      "patternMessage": "Please enter a valid 10-digit mobile number."
     }
   },
   {
     "_id": "1aed2b69a9a2da599079afc8",
     "createdAt": "2026-11-08T12:26:13.853Z",
-    "updatedAt": "2026-11-08T12:28:04.882Z",
+    "updatedAt": "2026-11-08T12:41:56.874Z",
     "key": "cabRequired",
     "label": "Cab Required",
-    "type": "radio",
+    "type": "select",
     "category": "Travel & Stay",
     "defaultRequired": true,
     "options": [
@@ -84,31 +84,31 @@
   {
     "_id": "c407f926d40ccba07f23ec04",
     "createdAt": "2026-11-08T12:26:13.853Z",
-    "updatedAt": "2026-11-08T12:28:04.883Z",
+    "updatedAt": "2026-11-08T12:41:56.875Z",
     "key": "pickupAddress",
     "label": "Pickup Address",
     "type": "textarea",
     "category": "Travel & Stay",
-    "placeholder": "Enter complete residential / office pickup address for cab pickup",
+    "placeholder": "Enter complete residential / office pickup address",
     "helpText": "Required if cab service is requested",
     "defaultRequired": false
   },
   {
     "_id": "6a1725e06cd23bf4d28b9ed1",
     "createdAt": "2026-11-08T12:26:13.853Z",
-    "updatedAt": "2026-11-08T12:28:04.884Z",
+    "updatedAt": "2026-11-08T12:41:56.869Z",
     "key": "spouseName",
     "label": "Spouse / Partner Name",
     "type": "text",
     "category": "Personal Details",
-    "placeholder": "Enter spouse/partner full name if attending",
-    "helpText": "Leave blank if attending alone",
+    "placeholder": "Enter spouse / partner name",
+    "helpText": "Leave empty if attending alone",
     "defaultRequired": false
   },
   {
     "_id": "29a854a65454340edb3774f0",
     "createdAt": "2026-11-08T12:26:13.854Z",
-    "updatedAt": "2026-11-08T12:28:04.885Z",
+    "updatedAt": "2026-11-08T12:41:56.876Z",
     "key": "spouseHeightEligibility",
     "label": "Spouse Height Eligibility",
     "type": "select",
@@ -128,10 +128,10 @@
   {
     "_id": "39a0550fe19de0c224048920",
     "createdAt": "2026-11-08T12:26:13.854Z",
-    "updatedAt": "2026-11-08T12:28:04.886Z",
+    "updatedAt": "2026-11-08T12:41:56.876Z",
     "key": "spouseTicketRequired",
     "label": "Spouse Ticket Required",
-    "type": "radio",
+    "type": "select",
     "category": "Personal Details",
     "defaultRequired": false,
     "options": [
@@ -148,12 +148,12 @@
   {
     "_id": "134bec906ce49332e274e52a",
     "createdAt": "2026-11-08T12:26:13.855Z",
-    "updatedAt": "2026-11-08T12:28:04.887Z",
+    "updatedAt": "2026-11-08T12:41:56.870Z",
     "key": "employeeIdCard",
-    "label": "Employee ID Card",
+    "label": "Employee / Registrant ID Card",
     "type": "file",
     "category": "ID & Verification",
-    "helpText": "Upload valid employee ID or company badge (Max 5MB, JPG/PNG/PDF)",
+    "helpText": "Upload the ID card of the person registering. JPG, JPEG, PNG or PDF. Maximum size: 5 MB.",
     "defaultRequired": true,
     "validationConfig": {
       "maxFileSize": 5242880,
@@ -168,12 +168,12 @@
   {
     "_id": "5832357ad80ecbd25305206d",
     "createdAt": "2026-11-08T12:26:13.855Z",
-    "updatedAt": "2026-11-08T12:28:04.887Z",
+    "updatedAt": "2026-11-08T12:41:56.870Z",
     "key": "spouseIdCard",
-    "label": "Spouse / Partner ID Card",
+    "label": "Spouse / Partner ID Card (Wife / Husband)",
     "type": "file",
     "category": "ID & Verification",
-    "helpText": "Upload valid ID proof for spouse/partner (Max 5MB, JPG/PNG/PDF)",
+    "helpText": "Upload the ID card of your spouse / partner. Mandatory if your spouse / partner is attending. JPG, JPEG, PNG or PDF. Maximum size: 5 MB.",
     "defaultRequired": false,
     "validationConfig": {
       "maxFileSize": 5242880,
@@ -188,7 +188,7 @@
   {
     "_id": "54f8a7ebdbeae11d244a88e4",
     "createdAt": "2026-11-08T12:26:13.855Z",
-    "updatedAt": "2026-11-08T12:28:04.889Z",
+    "updatedAt": "2026-11-08T12:41:56.875Z",
     "key": "employeeHeightEligibility",
     "label": "Employee Height Eligibility",
     "type": "select",
@@ -208,10 +208,10 @@
   {
     "_id": "02d82404a3c5844ae3b345e4",
     "createdAt": "2026-11-08T12:26:13.855Z",
-    "updatedAt": "2026-11-08T12:28:04.890Z",
+    "updatedAt": "2026-11-08T12:41:56.876Z",
     "key": "employeeTicketRequired",
     "label": "Employee Ticket Required",
-    "type": "radio",
+    "type": "select",
     "category": "Personal Details",
     "defaultRequired": true,
     "options": [
@@ -228,10 +228,10 @@
   {
     "_id": "98b84dfaf1d7cdbf768d1743",
     "createdAt": "2026-11-08T12:26:13.856Z",
-    "updatedAt": "2026-11-08T12:28:04.891Z",
+    "updatedAt": "2026-11-08T12:41:56.877Z",
     "key": "bringingKids",
     "label": "Are you bringing kids?",
-    "type": "radio",
+    "type": "select",
     "category": "Family & Kids",
     "defaultRequired": true,
     "options": [
@@ -248,12 +248,191 @@
   {
     "_id": "04d31da861e641b40cd8370b",
     "createdAt": "2026-11-08T12:26:13.856Z",
-    "updatedAt": "2026-11-08T12:28:04.892Z",
+    "updatedAt": "2026-11-08T12:41:56.872Z",
     "key": "kids",
+    "label": "Are you bringing kids to Wonderla?",
+    "type": "select",
+    "category": "Family & Kids",
+    "helpText": "Provide child name, age (0–17), height eligibility, and ticket requirement for each child.",
+    "defaultRequired": true,
+    "options": [
+      {
+        "label": "Yes",
+        "value": "Yes"
+      },
+      {
+        "label": "No",
+        "value": "No"
+      }
+    ]
+  },
+  {
+    "_id": "5f3052272df113caf9bda8bd",
+    "createdAt": "2026-11-08T12:38:15.319Z",
+    "updatedAt": "2026-11-08T12:41:56.859Z",
+    "key": "sectionPersonal",
+    "label": "Personal Details",
+    "type": "section",
+    "category": "Personal Details",
+    "defaultRequired": false
+  },
+  {
+    "_id": "52deeaf290947e2ca0b032d3",
+    "createdAt": "2026-11-08T12:38:15.324Z",
+    "updatedAt": "2026-11-08T12:41:56.861Z",
+    "key": "name",
+    "label": "Name",
+    "type": "text",
+    "category": "Personal Details",
+    "placeholder": "Enter your name",
+    "helpText": "Primary attendee / employee full name",
+    "defaultRequired": true
+  },
+  {
+    "_id": "41cda8ba0e4f963d3858ba6f",
+    "createdAt": "2026-11-08T12:38:15.327Z",
+    "updatedAt": "2026-11-08T12:41:56.868Z",
+    "key": "cabReq",
+    "label": "Cab Required?",
+    "type": "select",
+    "category": "Travel & Stay",
+    "defaultRequired": true,
+    "options": [
+      {
+        "label": "Yes",
+        "value": "Yes"
+      },
+      {
+        "label": "No",
+        "value": "No"
+      }
+    ]
+  },
+  {
+    "_id": "600284d25cb9f54f429f3782",
+    "createdAt": "2026-11-08T12:38:15.327Z",
+    "updatedAt": "2026-11-08T12:41:56.868Z",
+    "key": "address",
+    "label": "Pickup Address",
+    "type": "textarea",
+    "category": "Travel & Stay",
+    "placeholder": "Enter your pickup address",
+    "helpText": "Pickup address is required if cab service is requested",
+    "defaultRequired": false
+  },
+  {
+    "_id": "6c1e7845c4b267075ebfab28",
+    "createdAt": "2026-11-08T12:38:15.328Z",
+    "updatedAt": "2026-11-08T12:41:56.869Z",
+    "key": "sectionIdCards",
+    "label": "ID Card Details",
+    "type": "section",
+    "category": "ID & Verification",
+    "defaultRequired": false
+  },
+  {
+    "_id": "acff6916276fb7e57d5fcc7a",
+    "createdAt": "2026-11-08T12:38:15.329Z",
+    "updatedAt": "2026-11-08T12:41:56.871Z",
+    "key": "sectionTicketDetails",
+    "label": "Wonderla Ticket Details",
+    "type": "section",
+    "category": "Personal Details",
+    "defaultRequired": false
+  },
+  {
+    "_id": "980be9cdfee3c1ff408ba2b4",
+    "createdAt": "2026-11-08T12:38:15.330Z",
+    "updatedAt": "2026-11-08T12:41:56.871Z",
+    "key": "employeeTicket",
+    "label": "Wonderla Ticket Required?",
+    "type": "select",
+    "category": "Personal Details",
+    "defaultRequired": true,
+    "options": [
+      {
+        "label": "Yes",
+        "value": "Yes"
+      },
+      {
+        "label": "No",
+        "value": "No"
+      }
+    ]
+  },
+  {
+    "_id": "d7ffa271aa85a9d7a5a48323",
+    "createdAt": "2026-11-08T12:38:15.330Z",
+    "updatedAt": "2026-11-08T12:41:56.871Z",
+    "key": "spouseTicket",
+    "label": "Wonderla Ticket Required?",
+    "type": "select",
+    "category": "Personal Details",
+    "defaultRequired": false,
+    "options": [
+      {
+        "label": "Yes",
+        "value": "Yes"
+      },
+      {
+        "label": "No",
+        "value": "No"
+      }
+    ]
+  },
+  {
+    "_id": "577296d4c0ab3ba4735ad9aa",
+    "createdAt": "2026-11-08T12:38:15.331Z",
+    "updatedAt": "2026-11-08T12:41:56.872Z",
+    "key": "sectionKidsDetails",
+    "label": "Kids Details",
+    "type": "section",
+    "category": "Family & Kids",
+    "defaultRequired": false
+  },
+  {
+    "_id": "4a2a743f65442d39c4d77f3d",
+    "createdAt": "2026-11-08T12:38:15.331Z",
+    "updatedAt": "2026-11-08T12:41:56.873Z",
+    "key": "kidsCount",
+    "label": "How many kids are accompanying you?",
+    "type": "select",
+    "category": "Family & Kids",
+    "defaultRequired": false,
+    "options": [
+      {
+        "label": "1",
+        "value": "1"
+      },
+      {
+        "label": "2",
+        "value": "2"
+      },
+      {
+        "label": "3",
+        "value": "3"
+      }
+    ]
+  },
+  {
+    "_id": "e6f3e5597881cb813643c235",
+    "createdAt": "2026-11-08T12:38:15.332Z",
+    "updatedAt": "2026-11-08T12:41:56.873Z",
+    "key": "kidsDetails",
     "label": "Kids Details (Max 3 children)",
     "type": "repeatable",
     "category": "Family & Kids",
-    "helpText": "Provide child name, age (0–17), height eligibility, and ticket requirement for each child.",
+    "helpText": "Each child requires Name, Age (0–17), Height Eligibility, and Wonderla Ticket choice.",
+    "defaultRequired": false
+  },
+  {
+    "_id": "5f3b1fba11f7eae084aa61f0",
+    "createdAt": "2026-11-08T12:38:15.332Z",
+    "updatedAt": "2026-11-08T12:41:56.873Z",
+    "key": "sectionTicketSummary",
+    "label": "Wonderla Ticket Summary",
+    "type": "section",
+    "category": "Personal Details",
     "defaultRequired": false
   }
 ]

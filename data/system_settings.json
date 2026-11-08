@@ -1,0 +1,34 @@
+[
+  {
+    "_id": "232dec50669f4ae6069daf5a",
+    "createdAt": "2026-11-08T12:35:37.584Z",
+    "updatedAt": "2026-11-08T12:40:13.432Z",
+    "key": "PUBLIC_API_URL",
+    "value": "http://localhost:3000",
+    "updatedBy": "admin@wonderla.com"
+  },
+  {
+    "_id": "42209895f363f9b5cb85958c",
+    "createdAt": "2026-11-08T12:35:37.591Z",
+    "updatedAt": "2026-11-08T12:40:13.433Z",
+    "key": "UPLOAD_MAX_MB",
+    "value": 5,
+    "updatedBy": "admin@wonderla.com"
+  },
+  {
+    "_id": "0039e17ab003fc0c393787d1",
+    "createdAt": "2026-11-08T12:35:37.592Z",
+    "updatedAt": "2026-11-08T12:40:13.434Z",
+    "key": "ALLOWED_FILE_TYPES",
+    "value": "image/jpeg, image/png, application/pdf",
+    "updatedBy": "admin@wonderla.com"
+  },
+  {
+    "_id": "d8ceb8a0bb424e457677c809",
+    "createdAt": "2026-11-08T12:35:37.593Z",
+    "updatedAt": "2026-11-08T12:40:13.434Z",
+    "key": "EMAIL_SIGNATURE",
+    "value": "",
+    "updatedBy": "admin@wonderla.com"
+  }
+]

@@ -7,6 +7,10 @@ describe('Local Data Store & Mongoose Model Proxy', () => {
 
   beforeEach(() => {
     testStore = new LocalStore('test_collection');
+    if (global.__localDataStoreCache__ && global.__localDataStoreCache__['test_collection']) {
+      global.__localDataStoreCache__['test_collection'] = [];
+      testStore['persist']();
+    }
   });
 
   it('should create and retrieve documents with auto-generated _id and timestamps', async () => {

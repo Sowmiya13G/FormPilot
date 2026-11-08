@@ -1,0 +1,11 @@
+[
+  {
+    "_id": "599ecbdaf2b963181b6f44ef",
+    "createdAt": "2026-11-08T12:35:37.595Z",
+    "updatedAt": "2026-11-08T12:40:13.435Z",
+    "provider": "GOOGLE_WORKSPACE",
+    "config.rootDriveFolderId": "",
+    "config.defaultSpreadsheetId": "",
+    "config.defaultSenderEmail": ""
+  }
+]
